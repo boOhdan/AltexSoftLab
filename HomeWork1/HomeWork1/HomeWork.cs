@@ -17,55 +17,51 @@ namespace HomeWork1
         {
             decimal fullPrice = default;
 
-            // Your solution supposed to be here.
-
-            var _prices = prices.ToArray();
-            var _destinations = destinations.ToArray();
-            var _currencies = currencies.ToArray();
-            var _clients = clients.ToArray();
+            var pricesArray = prices.ToArray();
+            var destinationsArray = destinations.ToArray();
+            var currenciesArray = currencies.ToArray();
+            var clientsArray = clients.ToArray();
             string street;
 
-            if (_prices.Length != _currencies.Length || _currencies.Length != _clients.Length)
+            if (pricesArray.Length != currenciesArray.Length || currenciesArray.Length != clientsArray.Length)
                 throw new Exception("Prices, currencies, clients have the different lengths");
 
-            for(var i = 0; i < _destinations.Length; i++)
+            for(var i = 0; i < destinationsArray.Length; i++)
             {
-                street = getStreet(_destinations[i]);
+                street = GetStreetName(destinationsArray[i]);
 
-                if (_currencies[i] == "EUR")
+                if (currenciesArray[i] == "EUR")
                 {
-                    _prices[i] *= 1.19m;
-                    _currencies[i] = "USD";
+                    pricesArray[i] *= 1.19m;
+                    currenciesArray[i] = "USD";
                 }
 
                 if (street == "Wayne Street")
-                    _prices[i] += 10;
+                    pricesArray[i] += 10;
 
                 else if (street == "North Heather Street")
-                    _prices[i] -= 5.36m;
+                    pricesArray[i] -= 5.36m;
 
                 if (childrenIds.Contains(i))
-                    _prices[i] -= 0.25m * _prices[i];
+                    pricesArray[i] -= 0.25m * pricesArray[i];
 
                 if (infantsIds.Contains(i)) 
-                    _prices[i] -= 0.5m * _prices[i];
+                    pricesArray[i] -= 0.5m * pricesArray[i];
 
                 if (i > 0)
                 {
-                    if (street == getStreet(_destinations[i - 1]))
-                        _prices[i] -= 0.15m * _prices[i];
+                    if (street == GetStreetName(destinationsArray[i - 1]))
+                        pricesArray[i] -= 0.15m * pricesArray[i];
                 }
 
             }
 
-            fullPrice = _prices.Sum();
-
-            // Your solution supposed to be here.
+            fullPrice = pricesArray.Sum();
 
             return fullPrice;
         }
 
-        public string getStreet(string destinations) 
+        public string GetStreetName(string destinations) 
         {
             string[] _destinations = destinations.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)[0]
                 .Trim()
