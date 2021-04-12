@@ -63,11 +63,11 @@ namespace HomeWork1
 
         public string GetStreetName(string destinations) 
         {
-            string[] _destinations = destinations.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)[0]
+            string[] destinationsArray = destinations.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)[0]
                 .Trim()
                 .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            return String.Join(' ', _destinations.Skip(1));
+            return String.Join(' ', destinationsArray.Skip(1));
         }
 
         public decimal InvokePriceCalculatiion()
