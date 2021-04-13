@@ -61,13 +61,13 @@ namespace HomeWork1
             return fullPrice;
         }
 
-        public string GetStreetName(string destinations) 
+        public string GetStreetName(string destination) 
         {
-            string[] destinationsArray = destinations.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)[0]
+            string[] address = destination.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)[0]
                 .Trim()
                 .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            return String.Join(' ', destinationsArray.Skip(1));
+            return String.Join(' ', address.Skip(1));
         }
 
         public decimal InvokePriceCalculatiion()
