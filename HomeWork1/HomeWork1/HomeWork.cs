@@ -23,8 +23,12 @@ namespace HomeWork1
             var clientsArray = clients.ToArray();
             string street;
 
-            if (pricesArray.Length != currenciesArray.Length || currenciesArray.Length != clientsArray.Length)
+            if (pricesArray.Length != currenciesArray.Length 
+                || currenciesArray.Length != clientsArray.Length 
+                || clientsArray.Length != destinationsArray.Length) 
+            {
                 throw new Exception("Prices, currencies, clients have the different lengths");
+            }
 
             for(var i = 0; i < destinationsArray.Length; i++)
             {
