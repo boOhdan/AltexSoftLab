@@ -11,6 +11,6 @@ namespace FoodOrdering
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public decimal Calories { get; set; }
+        public float Calories { get; set; }
     }
 }
