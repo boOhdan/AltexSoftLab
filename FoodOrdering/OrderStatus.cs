@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrdering
 {
-    enum OrderStatus
+    public enum OrderStatus
     {
         InProcess,
         Ready

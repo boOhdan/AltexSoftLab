@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace FoodOrdering
 {
-    class Customer
+    public class Customer
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public DateTime DayOfBirthday { get; set; }
+        public DateTime DateOfBirthday { get; set; }
         public string Password { get; set; }
     }
 }
