@@ -8,8 +8,7 @@ namespace FoodOrdering
 {
     public interface IMessageService
     {
-        public bool SendMessage(string message);
-        public string ReceiveMessage();
-
+        bool SendMessage(string message);
+        string ReceiveMessage();
     }
 }
