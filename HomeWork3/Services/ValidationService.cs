@@ -1,17 +1,15 @@
-﻿using FoodOrdering.Date;
+﻿using FoodOrdering.Contracts;
+using FoodOrdering.Date;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodOrdering.Services
 {
-    public class ValidationService
+    public class ValidationService : IValidationService
     {
-        private readonly ProductsStore _productsStore;
+        private readonly IProductsStore _productsStore;
 
-        public ValidationService(ProductsStore products)
+        public ValidationService(IProductsStore products)
         {
             _productsStore = products;
         }

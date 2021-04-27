@@ -1,4 +1,5 @@
-﻿using FoodOrdering.Services;
+﻿using FoodOrdering.Contracts;
+using FoodOrdering.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace FoodOrdering
         public string Name { get; set; }
         public IProductService ProductService { get; set; }
         public IMessageService MessageService { get; set; }
-        public ValidationService ValidationService { get; set; }
+        public IValidationService ValidationService { get; set; }
 
-        public OrderSystem(string name, IMessageService messageService, IProductService productService, ValidationService validationService) 
+        public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService) 
         {
             Name = name;
             MessageService = messageService;

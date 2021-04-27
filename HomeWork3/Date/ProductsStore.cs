@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using FoodOrdering.Contracts;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FoodOrdering.Date
 {
-    public class ProductsStore 
+    public class ProductsStore : IProductsStore
     {
         public IEnumerable<Product> Products { get; set; }
 

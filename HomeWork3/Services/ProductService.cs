@@ -1,17 +1,16 @@
-﻿using FoodOrdering.Date;
+﻿using FoodOrdering.Contracts;
+using FoodOrdering.Date;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodOrdering
 {
     public class ProductService : IProductService
     {
-        private readonly ProductsStore _productsStore;
+        private readonly IProductsStore _productsStore;
 
-        public ProductService(ProductsStore products)
+        public ProductService(IProductsStore products)
         {
             _productsStore = products;
         }
