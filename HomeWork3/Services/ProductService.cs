@@ -9,18 +9,22 @@ namespace FoodOrdering
 {
     public class ProductService : IProductService
     {
-        public ProductsStore ProductsStore { get; set; }
+        private readonly ProductsStore _productsStore;
 
         public ProductService(ProductsStore products)
         {
-            ProductsStore = products;
+            _productsStore = products;
         }
 
         public IEnumerable<Product> AddProduct(Product product)
         {
-            return ProductsStore.Products = ProductsStore.Products.Append(product);
+            return _productsStore.Products = _productsStore.Products.Append(product);
         }
 
+        public IEnumerable<Product> GetAllProducts() 
+        {
+            return _productsStore.Products;
+        }
         public IDictionary<int, string> GetProductTypes()
         {
             return Enum.GetValues(typeof(ProductType))
@@ -30,14 +34,14 @@ namespace FoodOrdering
 
         public IDictionary<int, Product> GetProductsByType(ProductType productType)
         {
-            return ProductsStore.Products.Select((product, index) => new { index, product })
+            return _productsStore.Products.Select((product, index) => new { index, product })
                     .Where(a => a.product.Type == productType)
                     .ToDictionary(a => a.index, a => a.product);
         }
 
         public Product GetProductById(int id)
         {
-            return ProductsStore.Products.ElementAt(id);
+            return _productsStore.Products.ElementAt(id);
         }
 
         public Product ReduceProductQuantity(int id, int quantity) 
@@ -48,7 +52,7 @@ namespace FoodOrdering
 
         public IEnumerable<Product> DeleteProduct(int id) 
         {
-            return ProductsStore.Products = ProductsStore.Products.Where(a => a != GetProductById(id));
+            return _productsStore.Products = _productsStore.Products.Where(a => a != GetProductById(id));
         }
     }
 }

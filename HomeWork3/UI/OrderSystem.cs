@@ -213,7 +213,7 @@ namespace FoodOrdering
                 return false;
             }
 
-            foreach (var product in  ProductService.ProductsStore.Products) 
+            foreach (var product in  ProductService.GetAllProducts()) 
             {
                 MessageService.SendMessage(product.ToString());
             }

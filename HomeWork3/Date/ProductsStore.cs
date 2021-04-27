@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 
 namespace FoodOrdering.Date
 {
@@ -7,16 +7,20 @@ namespace FoodOrdering.Date
     {
         public IEnumerable<Product> Products { get; set; }
 
-        public ProductsStore() 
+        public ProductsStore(IEnumerable<Product> products = null) 
         {
-            Products = new List<Product>()
+            Products = products ?? Enumerable.Empty<Product>();
+        }
+        public IEnumerable<Product> AddDefaultElements()
+        {
+            return Products = Products.Concat(new List<Product>()
                 {
                     new Product("Toast", "Toast...", 12, ProductType.Breads, 5),
                     new Product("Corn", "Corn...", 13, ProductType.Cereals, 12),
                     new Product("Wheat", "Wheat...", 17, ProductType.Cereals, 23),
                     new Product("Pizza", "Pizza...", 23, ProductType.Breads, 12),
                     new Product("Beef", "Beef...", 160, ProductType.Meat, 23),
-                };
+                });
         }
     }
 }

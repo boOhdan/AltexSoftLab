@@ -9,11 +9,11 @@ namespace FoodOrdering.Services
 {
     public class ValidationService
     {
-        public ProductsStore ProductsStore { get; set; }
+        private readonly ProductsStore _productsStore;
 
         public ValidationService(ProductsStore products)
         {
-            ProductsStore = products;
+            _productsStore = products;
         }
 
         public bool IsSuchTypeExist(int id) 
@@ -22,19 +22,19 @@ namespace FoodOrdering.Services
         }
         public bool IsSuchProductExist(int id)
         {
-            return IsPositiveNumber(id) && ProductsStore.Products.Count() > id;
+            return IsPositiveNumber(id) && _productsStore.Products.Count() > id;
         }
         public bool IsTheraAnyProductWithSuchType(ProductType productType) 
         {
-            return ProductsStore.Products.Where(a => a.Type == productType).Any();
+            return _productsStore.Products.Where(a => a.Type == productType).Any();
         }
         public bool HasSystemEnoughProducts(int id, int quantity) 
         { 
-            return ProductsStore.Products.ElementAt(id).Quantity >= quantity; 
+            return _productsStore.Products.ElementAt(id).Quantity >= quantity; 
         }
         public bool IsProductHasSuchType(int id, ProductType type) 
         {
-            return ProductsStore.Products.ElementAt(id).Type == type;
+            return _productsStore.Products.ElementAt(id).Type == type;
         }
         public bool IsPositiveNumber(decimal element) 
         { 
@@ -42,7 +42,7 @@ namespace FoodOrdering.Services
         }
         public bool IsProductsNotEmpty()
         {
-            return ProductsStore.Products.Count() > 0;
+            return _productsStore.Products.Count() > 0;
         }
     }
 }

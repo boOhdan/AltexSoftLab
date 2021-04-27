@@ -9,7 +9,7 @@ namespace FoodOrdering
 {
     public interface IProductService
     {
-        ProductsStore ProductsStore { get; set; }
+        public IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> AddProduct(Product product);
         IDictionary<int, string> GetProductTypes();
         IDictionary<int, Product> GetProductsByType(ProductType productType);
