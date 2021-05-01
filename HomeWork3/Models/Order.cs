@@ -22,15 +22,6 @@ namespace FoodOrdering
             Status = OrderStatus.InProcess;
         }
 
-        public bool AddOrderItem(OrderItem orderItem) 
-        {
-            if (orderItem is null)
-                return false;
-
-            OrderItems = OrderItems.Append(orderItem);
-            return true;
-        }
-
         public override string ToString()
         {
             string str = String.Format("OrderDate: {0}; \nAddress: {1}; \nPhoneNumber: {2}, \nStatus: {3}",
