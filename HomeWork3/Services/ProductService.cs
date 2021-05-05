@@ -15,12 +15,14 @@ namespace FoodOrdering
             _productsStore = products;
         }
 
-        public IEnumerable<Product> AddProduct(Product product)
+        public ICollection<Product> AddProduct(Product product)
         {
-            return _productsStore.Products = _productsStore.Products.Append(product);
+            _productsStore.Products.Add(product);
+
+            return _productsStore.Products;
         }
 
-        public IEnumerable<Product> GetAllProducts() 
+        public ICollection<Product> GetAllProducts() 
         {
             return _productsStore.Products;
         }
@@ -51,7 +53,7 @@ namespace FoodOrdering
 
         public IEnumerable<Product> DeleteProduct(int id) 
         {
-            return _productsStore.Products = _productsStore.Products.Where(a => a != GetProductById(id));
+            return _productsStore.Products.Where(a => a != GetProductById(id));
         }
     }
 }

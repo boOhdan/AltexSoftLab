@@ -5,7 +5,7 @@ namespace FoodOrdering.Contracts
 {
     public interface IProductsStore
     {
-        IEnumerable<Product> Products { get; set; }
-        IEnumerable<Product> AddDefaultElements();
+        ICollection<Product> Products { get; set; }
+        ICollection<Product> AddDefaultElements();
     }
 }

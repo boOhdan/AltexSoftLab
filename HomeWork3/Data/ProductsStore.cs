@@ -6,13 +6,13 @@ namespace FoodOrdering.Data
 {
     public class ProductsStore : IProductsStore
     {
-        public IEnumerable<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
 
-        public ProductsStore(IEnumerable<Product> products = null) 
+        public ProductsStore(IList<Product> products = null) 
         {
-            Products = products ?? Enumerable.Empty<Product>();
+            Products = products ?? new List<Product>();
         }
-        public IEnumerable<Product> AddDefaultElements()
+        public ICollection<Product> AddDefaultElements()
         {
             return Products = Products.Concat(new List<Product>()
                 {
@@ -21,7 +21,7 @@ namespace FoodOrdering.Data
                     new Product("Wheat", "Wheat...", 17, ProductType.Cereals, 23),
                     new Product("Pizza", "Pizza...", 23, ProductType.Breads, 12),
                     new Product("Beef", "Beef...", 160, ProductType.Meat, 23),
-                });
+                }).ToList();
         }
     }
 }
