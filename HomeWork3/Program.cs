@@ -1,5 +1,7 @@
 ﻿using FoodOrdering.Data;
 using FoodOrdering.Services;
+using System;
+using System.Text;
 
 namespace FoodOrdering
 {
@@ -7,6 +9,8 @@ namespace FoodOrdering
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             ProductsStore productsStore = new ProductsStore();
             productsStore.AddDefaultElements();
 

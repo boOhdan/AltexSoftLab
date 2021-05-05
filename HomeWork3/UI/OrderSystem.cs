@@ -34,21 +34,22 @@ namespace FoodOrdering
 
                 var result = false;
 
-                switch(int.Parse(MessageService.ReceiveMessage()))
+                switch(MessageService.ReceiveMessage().Trim())
                 {
-                    case 1:
+                    case "1":
                         result = AddProduct();
                         break;
-                    case 2:
+                    case "2":
                         result = OrderProduct();
                         break;
-                    case 3:
+                    case "3":
                         result = ShowAllProducts();
                         break;
-                    case 4:
+                    case "4":
                         return;
                     default:
-                        throw new ArgumentException();
+                        MessageService.SendMessage("Введенi некоректнi данi!");
+                        break;
                 };
 
                 FinishOperation(result);
