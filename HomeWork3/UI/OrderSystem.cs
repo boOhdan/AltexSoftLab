@@ -9,32 +9,32 @@ namespace FoodOrdering
 {
     public class OrderSystem
     {
-        public string Name { get; set; }
-        public IProductService ProductService { get; set; }
-        public IMessageService MessageService { get; set; }
-        public IValidationService ValidationService { get; set; }
+        private readonly string _name;
+        private readonly IProductService _productService;
+        private readonly IMessageService _messageService;
+        private readonly IValidationService _validationService;
 
         public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService) 
         {
-            Name = name;
-            MessageService = messageService;
-            ProductService = productService;
-            ValidationService = validationService;
+            _name = name;
+            _messageService = messageService;
+            _productService = productService;
+            _validationService = validationService;
         }
 
         public void Start() 
         {
             while(true) 
             {
-                MessageService.SendMessage("Виберiть операцiю:");
-                MessageService.SendMessage("1. Додати продукт;");
-                MessageService.SendMessage("2. Зробити замовлення;");
-                MessageService.SendMessage("3. Показати продукти в наявностi;");
-                MessageService.SendMessage("4. Завершити роботу.");
+                _messageService.SendMessage("Виберiть операцiю:");
+                _messageService.SendMessage("1. Додати продукт;");
+                _messageService.SendMessage("2. Зробити замовлення;");
+                _messageService.SendMessage("3. Показати продукти в наявностi;");
+                _messageService.SendMessage("4. Завершити роботу.");
 
                 var result = false;
 
-                switch(MessageService.ReceiveMessage().Trim())
+                switch(_messageService.ReceiveMessage().Trim())
                 {
                     case "1":
                         result = AddProduct();
@@ -48,7 +48,7 @@ namespace FoodOrdering
                     case "4":
                         return;
                     default:
-                        MessageService.SendMessage("Введенi некоректнi данi!");
+                        _messageService.SendMessage("Введенi некоректнi данi!");
                         break;
                 };
 
@@ -62,48 +62,48 @@ namespace FoodOrdering
 
             while (true) 
             {
-                MessageService.SendMessage("Вкажiть назву продукту:");
-                var name = MessageService.ReceiveMessage();
+                _messageService.SendMessage("Вкажiть назву продукту:");
+                var name = _messageService.ReceiveMessage();
 
-                MessageService.SendMessage("Вкажiть опис продукту:");
-                var description = MessageService.ReceiveMessage();
+                _messageService.SendMessage("Вкажiть опис продукту:");
+                var description = _messageService.ReceiveMessage();
 
-                MessageService.SendMessage("Вкажiть цiну продукту:");
-                var price = decimal.Parse(MessageService.ReceiveMessage());
+                _messageService.SendMessage("Вкажiть цiну продукту:");
+                var price = decimal.Parse(_messageService.ReceiveMessage());
 
-                if (!ValidationService.IsPositiveNumber(price))
+                if (!_validationService.IsPositiveNumber(price))
                 {
-                    MessageService.SendMessage("Ціна не може бути вiдємною!");
+                    _messageService.SendMessage("Ціна не може бути вiдємною!");
                     return false;
                 }
 
-                MessageService.SendMessage("Вкажiть тип продукту:");
+                _messageService.SendMessage("Вкажiть тип продукту:");
 
-                foreach (var typeItem in ProductService.GetProductTypes())
+                foreach (var typeItem in _productService.GetProductTypes())
                 {
-                    MessageService.SendMessage($"{typeItem.Key} - {typeItem.Value}");
+                    _messageService.SendMessage($"{typeItem.Key} - {typeItem.Value}");
                 }
 
-                var typeNumber = int.Parse(MessageService.ReceiveMessage());
+                var typeNumber = int.Parse(_messageService.ReceiveMessage());
 
-                if (!ValidationService.IsSuchTypeExist(typeNumber)) 
+                if (!_validationService.IsSuchTypeExist(typeNumber)) 
                 {
-                    MessageService.SendMessage("Вибраного вами типу не існує!");
+                    _messageService.SendMessage("Вибраного вами типу не існує!");
                     return false;
                 }
 
-                MessageService.SendMessage("Вкажiть кiлькiсть продукту:");
-                var quantity = int.Parse(MessageService.ReceiveMessage());
+                _messageService.SendMessage("Вкажiть кiлькiсть продукту:");
+                var quantity = int.Parse(_messageService.ReceiveMessage());
 
-                if (!ValidationService.IsPositiveNumber(quantity))
+                if (!_validationService.IsPositiveNumber(quantity))
                 {
-                    MessageService.SendMessage("Кiлькiсть не може бути вiдємною!");
+                    _messageService.SendMessage("Кiлькiсть не може бути вiдємною!");
                     return false;
                 }
 
                 product = new Product(name, description, price, (ProductType)typeNumber, quantity);
 
-                ProductService.AddProduct(product); 
+                _productService.AddProduct(product); 
 
                 if (!AskQuestion("Бажаєте ще додати продукт?"))
                     break;
@@ -119,87 +119,87 @@ namespace FoodOrdering
 
             while (true)
             {
-                MessageService.SendMessage("Виберiть номер типу продукту, який бажаєте замовити:");
+                _messageService.SendMessage("Виберiть номер типу продукту, який бажаєте замовити:");
 
-                foreach (var typeItem in ProductService.GetProductTypes())
+                foreach (var typeItem in _productService.GetProductTypes())
                 {
-                    MessageService.SendMessage($"{typeItem.Key} - {typeItem.Value}");
+                    _messageService.SendMessage($"{typeItem.Key} - {typeItem.Value}");
                 }
 
-                var typeNumber = int.Parse(MessageService.ReceiveMessage());
+                var typeNumber = int.Parse(_messageService.ReceiveMessage());
 
-                if (!ValidationService.IsSuchTypeExist(typeNumber))
+                if (!_validationService.IsSuchTypeExist(typeNumber))
                 {
-                    MessageService.SendMessage("Вибраного вами типу не iснує!");
+                    _messageService.SendMessage("Вибраного вами типу не iснує!");
                     return false;
                 }
 
-                if (!ValidationService.IsTheraAnyProductWithSuchType((ProductType)typeNumber))
+                if (!_validationService.IsTheraAnyProductWithSuchType((ProductType)typeNumber))
                 {
-                    MessageService.SendMessage("Продуктiв з таким типом немає в наявностi!");
+                    _messageService.SendMessage("Продуктiв з таким типом немає в наявностi!");
                     return false;
                 }
 
-                MessageService.SendMessage("Виберiть продукт, який бажаєте замовити:");
+                _messageService.SendMessage("Виберiть продукт, який бажаєте замовити:");
 
-                foreach (var productItem in ProductService.GetProductsByType((ProductType)typeNumber)) 
+                foreach (var productItem in _productService.GetProductsByType((ProductType)typeNumber)) 
                 {
-                    MessageService.SendMessage($"{productItem.Key} - {productItem.Value}");
+                    _messageService.SendMessage($"{productItem.Key} - {productItem.Value}");
                 }
 
-                var productNumber = int.Parse(MessageService.ReceiveMessage());
+                var productNumber = int.Parse(_messageService.ReceiveMessage());
 
-                if (!ValidationService.IsSuchProductExist(productNumber))
+                if (!_validationService.IsSuchProductExist(productNumber))
                 {
-                    MessageService.SendMessage("Продукт не iснує!"); 
+                    _messageService.SendMessage("Продукт не iснує!"); 
                     return false;
                 }
 
-                if (!ValidationService.IsProductHasSuchType(productNumber, (ProductType)typeNumber))
+                if (!_validationService.IsProductHasSuchType(productNumber, (ProductType)typeNumber))
                 {
-                    MessageService.SendMessage("Продукт не належить до вибраного вами типу!"); 
+                    _messageService.SendMessage("Продукт не належить до вибраного вами типу!"); 
                     return false;
                 }
 
-                MessageService.SendMessage("Введiть кiлькiсть:");
+                _messageService.SendMessage("Введiть кiлькiсть:");
 
-                var quantity = int.Parse(MessageService.ReceiveMessage());
+                var quantity = int.Parse(_messageService.ReceiveMessage());
 
-                if (!ValidationService.HasSystemEnoughProducts(productNumber, quantity))
+                if (!_validationService.HasSystemEnoughProducts(productNumber, quantity))
                 {
-                    MessageService.SendMessage("Недостатня кiлькiсть товару на складi!"); 
+                    _messageService.SendMessage("Недостатня кiлькiсть товару на складi!"); 
                     return false;
                 }
 
-                ProductService.ReduceProductQuantity(productNumber, quantity);
+                _productService.ReduceProductQuantity(productNumber, quantity);
 
-                orderItems = orderItems.Append(new OrderItem(ProductService.GetProductById(productNumber), quantity));
+                orderItems = orderItems.Append(new OrderItem(_productService.GetProductById(productNumber), quantity));
 
                 if (!AskQuestion("Бажаєте ще замовити продукт?"))
                     break;
             }
 
-            MessageService.SendMessage("Введiть aдрес:");
-            var address = MessageService.ReceiveMessage();
+            _messageService.SendMessage("Введiть aдрес:");
+            var address = _messageService.ReceiveMessage();
 
-            MessageService.SendMessage("Введiть номер:");
-            var phoneNumber = MessageService.ReceiveMessage();
+            _messageService.SendMessage("Введiть номер:");
+            var phoneNumber = _messageService.ReceiveMessage();
 
             order = new Order(address, phoneNumber, orderItems);
 
-            MessageService.SendMessage(order.ToString());
+            _messageService.SendMessage(order.ToString());
 
             return true;
         }
 
         public bool AskQuestion(string message) 
         {
-            MessageService.SendMessage(message);
+            _messageService.SendMessage(message);
 
-            MessageService.SendMessage("1. Так");
-            MessageService.SendMessage("2. Нi");
+            _messageService.SendMessage("1. Так");
+            _messageService.SendMessage("2. Нi");
 
-            return int.Parse(MessageService.ReceiveMessage()) switch
+            return int.Parse(_messageService.ReceiveMessage()) switch
             {
                 1 => true, 
                 2 => false,
@@ -209,15 +209,15 @@ namespace FoodOrdering
 
         public bool ShowAllProducts() 
         {
-            if (!ValidationService.IsProductsNotEmpty()) 
+            if (!_validationService.IsProductsNotEmpty()) 
             {
-                MessageService.SendMessage("Склад продуктiв пустий!");
+                _messageService.SendMessage("Склад продуктiв пустий!");
                 return false;
             }
 
-            foreach (var product in  ProductService.GetAllProducts()) 
+            foreach (var product in  _productService.GetAllProducts()) 
             {
-                MessageService.SendMessage(product.ToString());
+                _messageService.SendMessage(product.ToString());
             }
 
             return true;
@@ -226,11 +226,11 @@ namespace FoodOrdering
         public void FinishOperation(bool result)
         {
             if (result)
-                MessageService.SendMessage("<<Операцiя виконана успiшно>>");
+                _messageService.SendMessage("<<Операцiя виконана успiшно>>");
             else
-                MessageService.SendMessage("<<Операцiя провалилась>>");
+                _messageService.SendMessage("<<Операцiя провалилась>>");
 
-            MessageService.SendMessage("\n_____________________________________________\n");
+            _messageService.SendMessage("\n_____________________________________________\n");
         }
     }
 }
