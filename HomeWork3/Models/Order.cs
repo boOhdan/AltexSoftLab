@@ -34,7 +34,7 @@ namespace FoodOrdering
                 str += "\n" + item;
             }
 
-            return str;
+            return str; //Змінити
         }
     }
 }

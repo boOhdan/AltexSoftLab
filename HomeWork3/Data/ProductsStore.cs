@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FoodOrdering.Date
+namespace FoodOrdering.Data
 {
     public class ProductsStore : IProductsStore
     {

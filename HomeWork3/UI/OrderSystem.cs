@@ -34,7 +34,7 @@ namespace FoodOrdering
 
                 var result = false;
 
-                switch(Int32.Parse(MessageService.ReceiveMessage()))
+                switch(int.Parse(MessageService.ReceiveMessage()))
                 {
                     case 1:
                         result = AddProduct();
@@ -68,7 +68,7 @@ namespace FoodOrdering
                 var description = MessageService.ReceiveMessage();
 
                 MessageService.SendMessage("Вкажiть цiну продукту:");
-                var price = Decimal.Parse(MessageService.ReceiveMessage());
+                var price = decimal.Parse(MessageService.ReceiveMessage());
 
                 if (!ValidationService.IsPositiveNumber(price))
                 {
@@ -83,7 +83,7 @@ namespace FoodOrdering
                     MessageService.SendMessage($"{typeItem.Key} - {typeItem.Value}");
                 }
 
-                var typeNumber = Int32.Parse(MessageService.ReceiveMessage());
+                var typeNumber = int.Parse(MessageService.ReceiveMessage());
 
                 if (!ValidationService.IsSuchTypeExist(typeNumber)) 
                 {
@@ -92,7 +92,7 @@ namespace FoodOrdering
                 }
 
                 MessageService.SendMessage("Вкажiть кiлькiсть продукту:");
-                var quantity = Int32.Parse(MessageService.ReceiveMessage());
+                var quantity = int.Parse(MessageService.ReceiveMessage());
 
                 if (!ValidationService.IsPositiveNumber(quantity))
                 {
@@ -125,7 +125,7 @@ namespace FoodOrdering
                     MessageService.SendMessage($"{typeItem.Key} - {typeItem.Value}");
                 }
 
-                var typeNumber = Int32.Parse(MessageService.ReceiveMessage());
+                var typeNumber = int.Parse(MessageService.ReceiveMessage());
 
                 if (!ValidationService.IsSuchTypeExist(typeNumber))
                 {
@@ -146,7 +146,7 @@ namespace FoodOrdering
                     MessageService.SendMessage($"{productItem.Key} - {productItem.Value}");
                 }
 
-                var productNumber = Int32.Parse(MessageService.ReceiveMessage());
+                var productNumber = int.Parse(MessageService.ReceiveMessage());
 
                 if (!ValidationService.IsSuchProductExist(productNumber))
                 {
@@ -162,7 +162,7 @@ namespace FoodOrdering
 
                 MessageService.SendMessage("Введiть кiлькiсть:");
 
-                var quantity = Int32.Parse(MessageService.ReceiveMessage());
+                var quantity = int.Parse(MessageService.ReceiveMessage());
 
                 if (!ValidationService.HasSystemEnoughProducts(productNumber, quantity))
                 {
@@ -198,7 +198,7 @@ namespace FoodOrdering
             MessageService.SendMessage("1. Так");
             MessageService.SendMessage("2. Нi");
 
-            return Int32.Parse(MessageService.ReceiveMessage()) switch
+            return int.Parse(MessageService.ReceiveMessage()) switch
             {
                 1 => true, 
                 2 => false,
