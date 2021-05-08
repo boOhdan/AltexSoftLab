@@ -1,7 +1,9 @@
 ﻿using FoodOrdering.Contracts;
 using FoodOrdering.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace FoodOrdering.Services
 {
@@ -41,6 +43,24 @@ namespace FoodOrdering.Services
         public bool IsProductsNotEmpty()
         {
             return _productsStore.Products.Count() > 0;
+        }
+        public bool IsAddressValid(string address) 
+        {
+            var pattern = @"^(ул\.|улица)\s?\w+(.|,)\s?(д\.|дом)\s?\d+(\,\s?(кв\.|квартира)\s?\d+\.?)?$";
+
+            if (Regex.IsMatch(address, pattern))
+                return true;
+
+            return false;
+        }
+        public bool IsNumberValid(string number)
+        {
+            var pattern = @"^(\+380(\(\d{2}\)|\d{2})|0\d{2})\s?\d{3}\s?\d{2}\s?\d{2}$";
+
+            if (Regex.IsMatch(number, pattern))
+                return true;
+
+            return false;
         }
     }
 }
