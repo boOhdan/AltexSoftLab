@@ -15,5 +15,7 @@ namespace FoodOrdering.Contracts
         bool IsProductHasSuchType(int id, ProductType type);
         bool IsPositiveNumber(decimal element);
         bool IsProductsNotEmpty();
+        bool IsNumberValid(string number);
+        bool IsAddressValid(string address);
     }
 }
