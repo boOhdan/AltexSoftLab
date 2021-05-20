@@ -8,18 +8,18 @@ namespace FoodOrdering.Services
 {
     public class Logger : ILogger
     {
-        private string FileDirectory { get; set; }
+        private readonly string _fileDirectory;
 
         public Logger(string filedirectory) 
         {
-            FileDirectory = Directory.Exists(filedirectory) ? filedirectory : throw new DirectoryNotFoundException();
+            _fileDirectory = Directory.Exists(filedirectory) ? filedirectory : throw new DirectoryNotFoundException();
         }
 
         public void Append<T>(T element, OperationType operationStatus) 
         {
-            var fileName = DateTime.Now.ToString("dddd, dd MMMM yyyy") + ".txt";
+            var fileName = "logs_" + DateTime.Now.ToString("MMddyyyy") + ".txt";
 
-            using var file = new FileStream(Path.Combine(FileDirectory, fileName), FileMode.Append);
+            using var file = new FileStream(Path.Combine(_fileDirectory, fileName), FileMode.Append);
             using var stream = new StreamWriter(file, Encoding.UTF8);
 
             stream.WriteLine($"date: {DateTime.Now}; operation: {operationStatus} {typeof(T).Name}; element: {element}");
