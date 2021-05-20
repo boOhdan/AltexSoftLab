@@ -11,8 +11,9 @@ namespace FoodOrdering
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            ProductsStore productsStore = new ProductsStore();
-            productsStore.AddDefaultElements();
+            var serializer = new JsonSerialization<Product>("JsonStore.json");
+            ProductsStore productsStore = new ProductsStore(serializer);
+            productsStore.GetStorageContext();
 
             var messageService = new ConsoleService();
             var productService = new ProductService(productsStore);

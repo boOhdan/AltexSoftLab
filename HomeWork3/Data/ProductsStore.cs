@@ -1,24 +1,26 @@
 ﻿using FoodOrdering.Contracts;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FoodOrdering.Data
 {
     public class ProductsStore : IProductsStore
     {
         public ICollection<Product> Products { get; set; }
+        private readonly ISerializer<Product> _jsonSerializer;
 
-        public ProductsStore(IList<Product> products = null) 
+        public ProductsStore(ISerializer<Product> serializer) 
         {
-            Products = products ?? new List<Product>();
+            Products = new List<Product>();
+            _jsonSerializer = serializer;
         }
-        public void AddDefaultElements()
+        public void GetStorageContext()
         {
-            Products.Add(new Product("Toast", "Toast...", 12, ProductType.Breads, 5));
-            Products.Add(new Product("Corn", "Corn...", 13, ProductType.Cereals, 12));
-            Products.Add(new Product("Wheat", "Wheat...", 17, ProductType.Cereals, 23));
-            Products.Add(new Product("Pizza", "Pizza...", 23, ProductType.Breads, 12));
-            Products.Add(new Product("Beef", "Beef...", 160, ProductType.Meat, 23));
+            Products = (ICollection<Product>)_jsonSerializer.DeserializeElementsFromFile<Product>();
+        }
+
+        public void SetStorageContext()
+        {
+            _jsonSerializer.SerializeElementsAndSaveToFile(Products);
         }
     }
 }
