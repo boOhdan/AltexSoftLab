@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
 
 namespace FoodOrdering
 {
@@ -24,17 +22,8 @@ namespace FoodOrdering
 
         public override string ToString()
         {
-            string str = String.Format("OrderDate: {0}; \nAddress: {1}; \nPhoneNumber: {2}, \nStatus: {3}",
+            return String.Format("OrderDate: {0}; Address: {1}; PhoneNumber: {2}, Status: {3}",
                 OrderDate, Address, PhoneNumber, Status);
-
-            str += "\nOrderItems:";
-
-            foreach(var item in OrderItems) 
-            {
-                str += "\n" + item;
-            }
-
-            return str; //Змінити
         }
     }
 }

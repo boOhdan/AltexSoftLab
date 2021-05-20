@@ -1,5 +1,5 @@
 ﻿using FoodOrdering.Contracts;
-using FoodOrdering.Services;
+using FoodOrdering.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +13,15 @@ namespace FoodOrdering
         private readonly IProductService _productService;
         private readonly IMessageService _messageService;
         private readonly IValidationService _validationService;
+        private readonly ILogger _logger;
 
-        public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService) 
+        public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService, ILogger logger) 
         {
             _name = name;
             _messageService = messageService;
             _productService = productService;
             _validationService = validationService;
+            _logger = logger;
         }
 
         public void Start() 
@@ -103,7 +105,8 @@ namespace FoodOrdering
 
                 product = new Product(name, description, price, (ProductType)typeNumber, quantity);
 
-                _productService.AddProduct(product); 
+                _productService.AddProduct(product);
+                _logger.Append(product, OperationType.Add);
 
                 if (!AskQuestion("Бажаєте ще додати продукт?"))
                     break;
@@ -199,7 +202,7 @@ namespace FoodOrdering
 
             order = new Order(address, phoneNumber, orderItems);
 
-            _messageService.SendMessage(order.ToString());
+            _logger.Append(order, OperationType.Add);
 
             return true;
         }
