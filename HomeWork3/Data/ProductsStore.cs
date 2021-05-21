@@ -15,7 +15,7 @@ namespace FoodOrdering.Data
         }
         public void GetStorageContext()
         {
-            Products = (ICollection<Product>)_jsonSerializer.DeserializeElementsFromFile<Product>();
+            Products = (ICollection<Product>)_jsonSerializer.DeserializeElementsFromFile();
         }
 
         public void SetStorageContext()
