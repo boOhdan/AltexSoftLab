@@ -6,21 +6,21 @@ namespace FoodOrdering.Data
     public class ProductsStore : IProductsStore
     {
         public ICollection<Product> Products { get; set; }
-        private readonly ISerializer<Product> _jsonSerializer;
+        private readonly IWorkingWithFile<Product> _workingWithFile;
 
-        public ProductsStore(ISerializer<Product> serializer) 
+        public ProductsStore(IWorkingWithFile<Product> workingWithFile) 
         {
             Products = new List<Product>();
-            _jsonSerializer = serializer;
+            _workingWithFile = workingWithFile;
         }
-        public void GetStorageContext()
+        public void InitializeProducts()
         {
-            Products = (ICollection<Product>)_jsonSerializer.DeserializeElementsFromFile();
+            Products = (ICollection<Product>)_workingWithFile.ReadElementsFromFile();
         }
 
-        public void SetStorageContext()
+        public void UpdateStorageContent()
         {
-            _jsonSerializer.SerializeElementsAndSaveToFile(Products);
+            _workingWithFile.WriteAndSaveElementsToOverwrittenFile(Products);
         }
     }
 }

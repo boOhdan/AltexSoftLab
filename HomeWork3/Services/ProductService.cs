@@ -17,7 +17,7 @@ namespace FoodOrdering
         public IEnumerable<Product> AddProduct(Product product)
         {
             _productsStore.Products.Add(product);
-            _productsStore.SetStorageContext();
+            _productsStore.UpdateStorageContent();
 
             return _productsStore.Products;
         }
@@ -54,7 +54,7 @@ namespace FoodOrdering
         public IEnumerable<Product> DeleteProduct(int id) 
         {
             _productsStore.Products.Where(a => a != GetProductById(id));
-            _productsStore.SetStorageContext();
+            _productsStore.UpdateStorageContent();
 
             return _productsStore.Products;
         }

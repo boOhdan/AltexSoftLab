@@ -7,16 +7,16 @@ using System.Text.Json;
 
 namespace FoodOrdering.Services
 {
-    public class JsonSerialization<T> : ISerializer<T>
+    public class WorkingWithFile<T> : IWorkingWithFile<T>
     {
         private readonly string _path;
 
-        public JsonSerialization(string fileName)
+        public WorkingWithFile(string fileName)
         {
-            _path = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
+            _path = AppDomain.CurrentDomain.BaseDirectory + fileName;
         }
 
-        public void SerializeElementsAndSaveToFile(IEnumerable<T> elements)
+        public void WriteAndSaveElementsToOverwrittenFile(IEnumerable<T> elements)
         {
             var serialized = JsonSerializer.Serialize(elements);
 
@@ -26,7 +26,7 @@ namespace FoodOrdering.Services
             stream.WriteLine(serialized);
         }
 
-        public IEnumerable<T> DeserializeElementsFromFile()
+        public IEnumerable<T> ReadElementsFromFile()
         {
             using var file = new FileStream(_path, FileMode.OpenOrCreate);
             using var stream = new StreamReader(file, Encoding.UTF8);

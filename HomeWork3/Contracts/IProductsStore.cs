@@ -5,7 +5,7 @@ namespace FoodOrdering.Contracts
     public interface IProductsStore
     {
         ICollection<Product> Products { get; set; }
-        void SetStorageContext();
-        void GetStorageContext();
+        void UpdateStorageContent();
+        void InitializeProducts();
     }
 }
