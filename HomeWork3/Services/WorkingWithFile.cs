@@ -28,12 +28,16 @@ namespace FoodOrdering.Services
 
         public IEnumerable<T> ReadElementsFromFile()
         {
-            using var file = new FileStream(_path, FileMode.OpenOrCreate);
+            if (!File.Exists(_path))
+                throw new FileNotFoundException();
+
+            using var file = new FileStream(_path, FileMode.Open);
             using var stream = new StreamReader(file, Encoding.UTF8);
 
-            var item = stream.ReadToEnd();
+            string readItem = stream.ReadToEnd();
 
-            return item != "" ? JsonSerializer.Deserialize<IEnumerable<T>>(item) : new List<T>();
+            return string.IsNullOrEmpty(readItem) ? Array.Empty<T>()  
+                : JsonSerializer.Deserialize<IEnumerable<T>>(readItem);
         }
     }
 }

@@ -11,8 +11,9 @@ namespace FoodOrdering
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var workingWithFile = new WorkingWithFile<Product>("JsonStore.json");
-            ProductsStore productsStore = new ProductsStore(workingWithFile);
+            var filePath = "JsonStore.json";
+            var workingWithFile = new WorkingWithFile<Product>(filePath);
+            var productsStore = new ProductsStore(workingWithFile);
             productsStore.InitializeProducts();
 
             var messageService = new ConsoleService();
