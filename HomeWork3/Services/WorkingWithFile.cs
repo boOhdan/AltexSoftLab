@@ -34,7 +34,7 @@ namespace FoodOrdering.Services
             using var file = new FileStream(_path, FileMode.Open);
             using var stream = new StreamReader(file, Encoding.UTF8);
 
-            string readItem = stream.ReadToEnd();
+            var readItem = stream.ReadToEnd();
 
             return string.IsNullOrEmpty(readItem) ? Array.Empty<T>()  
                 : JsonSerializer.Deserialize<IEnumerable<T>>(readItem);
