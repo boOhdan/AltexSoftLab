@@ -18,7 +18,8 @@ namespace FoodOrdering
             var productService = new ProductService(productsStore);
             var validationService = new ValidationService(productsStore);
             var logger = new Logger(@"D:\TestFolder");
-            var orderSystem = new OrderSystem("SameDelivery", messageService, productService, validationService, logger);
+            var productCache = new Cache<int, Product>();
+            var orderSystem = new OrderSystem("SameDelivery", messageService, productService, validationService, logger, productCache);
 
             orderSystem.Start();
         }

@@ -14,11 +14,11 @@ namespace FoodOrdering.Data
         }
         public void AddDefaultElements()
         {
-            Products.Add(new Product("Toast", "Toast...", 12, ProductType.Breads, 5));
-            Products.Add(new Product("Corn", "Corn...", 13, ProductType.Cereals, 12));
-            Products.Add(new Product("Wheat", "Wheat...", 17, ProductType.Cereals, 23));
-            Products.Add(new Product("Pizza", "Pizza...", 23, ProductType.Breads, 12));
-            Products.Add(new Product("Beef", "Beef...", 160, ProductType.Meat, 23));
+            Products.Add(new Product(1, "Toast", "Toast...", 12, ProductType.Breads, 5));
+            Products.Add(new Product(2, "Corn", "Corn...", 13, ProductType.Cereals, 12));
+            Products.Add(new Product(3, "Wheat", "Wheat...", 17, ProductType.Cereals, 23));
+            Products.Add(new Product(4, "Pizza", "Pizza...", 23, ProductType.Breads, 12));
+            Products.Add(new Product(5, "Beef", "Beef...", 160, ProductType.Meat, 23));
         }
     }
 }

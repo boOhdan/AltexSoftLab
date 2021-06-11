@@ -21,11 +21,15 @@ namespace FoodOrdering
 
             return _productsStore.Products;
         }
-
-        public ICollection<Product> GetAllProducts() 
+        public ICollection<Product> GetAllProducts()
         {
             return _productsStore.Products;
         }
+        public int GetProductsCount() 
+        {
+            return _productsStore.Products.Count();
+        }
+
         public IDictionary<int, string> GetProductTypes()
         {
             return Enum.GetValues(typeof(ProductType))
@@ -42,7 +46,7 @@ namespace FoodOrdering
 
         public Product GetProductById(int id)
         {
-            return _productsStore.Products.ElementAt(id);
+            return _productsStore.Products.First(product => product.Id == id);
         }
 
         public Product ReduceProductQuantity(int id, int quantity) 
