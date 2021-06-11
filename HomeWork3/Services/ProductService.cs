@@ -1,5 +1,4 @@
 ﻿using FoodOrdering.Contracts;
-using FoodOrdering.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +14,15 @@ namespace FoodOrdering
             _productsStore = products;
         }
 
-        public ICollection<Product> AddProduct(Product product)
+        public IEnumerable<Product> AddProduct(Product product)
         {
             _productsStore.Products.Add(product);
+            _productsStore.UpdateStorageContent();
 
             return _productsStore.Products;
         }
 
-        public ICollection<Product> GetAllProducts() 
+        public IEnumerable<Product> GetAllProducts() 
         {
             return _productsStore.Products;
         }
@@ -53,7 +53,10 @@ namespace FoodOrdering
 
         public IEnumerable<Product> DeleteProduct(int id) 
         {
-            return _productsStore.Products.Where(a => a != GetProductById(id));
+            _productsStore.Products.Where(a => a != GetProductById(id));
+            _productsStore.UpdateStorageContent();
+
+            return _productsStore.Products;
         }
     }
 }
