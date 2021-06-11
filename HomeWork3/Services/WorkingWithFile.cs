@@ -10,9 +10,10 @@ namespace FoodOrdering.Services
     public class WorkingWithFile<T> : IWorkingWithFile<T>
     {
         private readonly string _path;
-
+        public string FileName { get; }
         public WorkingWithFile(string fileName)
         {
+            FileName = fileName;
             _path = AppDomain.CurrentDomain.BaseDirectory + fileName;
         }
 
