@@ -188,20 +188,20 @@ namespace FoodOrdering
             _messageService.SendMessage("Введiть aдрес:");
             var address = _messageService.ReceiveMessage();
 
-            //if (!_validationService.IsAddressValid(address))
-            //{
-            //    _messageService.SendMessage("Адрес не пройшов валідацію!");
-            //    return false;
-            //}
+            if (!_validationService.IsAddressValid(address))
+            {
+                _messageService.SendMessage("Адрес не пройшов валідацію!");
+                return false;
+            }
 
             _messageService.SendMessage("Введiть номер:");
             var phoneNumber = _messageService.ReceiveMessage();
 
-            //if (!_validationService.IsNumberValid(phoneNumber))
-            //{
-            //    _messageService.SendMessage("Номер телефону не пройшов валідацію!");
-            //    return false;
-            //}
+            if (!_validationService.IsNumberValid(phoneNumber))
+            {
+                _messageService.SendMessage("Номер телефону не пройшов валідацію!");
+                return false;
+            }
 
             order = new OrderService(new Order(address, phoneNumber, orderItems));
 
