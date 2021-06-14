@@ -22,7 +22,7 @@ namespace FoodOrdering.Services
             {
                 if (!_cache.ContainsKey(key))
                 {
-                    if (IsCacheFull())
+                    if (_cache.Count == _sizeLimit)
                         DeleteLastElement();
 
                     _cache[key] = createElement(key);
@@ -32,14 +32,12 @@ namespace FoodOrdering.Services
             return _cache[key];
         }
 
-        public bool IsCacheFull() 
-        {
-            return _cache.Count == _sizeLimit;
-        }
-
         public void DeleteLastElement() 
         {
-            _cache.Remove(_cache.Keys.Last());
+            lock (_cacheLock) 
+            {
+                _cache.Remove(_cache.Keys.Last());
+            }
         }
     }
 }

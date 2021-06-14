@@ -14,7 +14,6 @@ namespace FoodOrdering
         private readonly IMessageService _messageService;
         private readonly IValidationService _validationService;
         private readonly ILogger _logger;
-        private readonly ICache<int, Product> _productCache;
 
         public OrderSystem(string name, IMessageService messageService, IProductService productService, 
             IValidationService validationService, ILogger logger, ICache<int, Product> productCache) 
@@ -24,7 +23,6 @@ namespace FoodOrdering
             _productService = productService;
             _validationService = validationService;
             _logger = logger;
-            _productCache = productCache;
         }
 
         public void Start() 
@@ -179,7 +177,7 @@ namespace FoodOrdering
 
                 _productService.ReduceProductQuantity(productNumber, quantity);
 
-                orderItems = orderItems.Append(new OrderItem(_productCache.GetOrCreate(productNumber, _productService.GetProductById), quantity));
+                orderItems = orderItems.Append(new OrderItem(_productService.GetProductById(productNumber), quantity));
 
                 if (!AskQuestion("Бажаєте ще замовити продукт?"))
                     break;
