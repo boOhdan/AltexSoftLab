@@ -15,9 +15,9 @@ namespace FoodOrdering
         private readonly IMessageService _messageService;
         private readonly IValidationService _validationService;
         private readonly ILogger _logger;
-        ExchangeRateService _exchangeRateService;
+        private readonly IExchangeRateService _exchangeRateService;
 
-        public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService, ILogger logger, ExchangeRateService exchangeRateService) 
+        public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService, ILogger logger, IExchangeRateService exchangeRateService) 
         {
             _name = name;
             _messageService = messageService;
@@ -120,7 +120,7 @@ namespace FoodOrdering
 
         public bool OrderProduct() 
         {
-            OrderExtension order = default;
+            OrderService order = default;
             IEnumerable<OrderItem> orderItems = new List<OrderItem>();
 
             while (true)
@@ -188,28 +188,28 @@ namespace FoodOrdering
             _messageService.SendMessage("Введiть aдрес:");
             var address = _messageService.ReceiveMessage();
 
-            if (!_validationService.IsAddressValid(address))
-            {
-                _messageService.SendMessage("Адрес не пройшов валідацію!");
-                return false;
-            }
+            //if (!_validationService.IsAddressValid(address))
+            //{
+            //    _messageService.SendMessage("Адрес не пройшов валідацію!");
+            //    return false;
+            //}
 
             _messageService.SendMessage("Введiть номер:");
             var phoneNumber = _messageService.ReceiveMessage();
 
-            if (!_validationService.IsNumberValid(phoneNumber))
-            {
-                _messageService.SendMessage("Номер телефону не пройшов валідацію!");
-                return false;
-            }
+            //if (!_validationService.IsNumberValid(phoneNumber))
+            //{
+            //    _messageService.SendMessage("Номер телефону не пройшов валідацію!");
+            //    return false;
+            //}
 
-            order = new OrderExtension(new Order(address, phoneNumber, orderItems));
+            order = new OrderService(new Order(address, phoneNumber, orderItems));
 
             if(AskQuestion("Бажаєте змінити валюту?")) 
             {
                 foreach (var exchangeRate in _exchangeRateService.GetExchangeRates())
                 {
-                    _messageService.SendMessage(exchangeRate.currency);
+                    _messageService.SendMessage(exchangeRate.Currency);
                 }
 
                 _messageService.SendMessage("Виберiть одну з перелічених вище валют:");
@@ -217,7 +217,7 @@ namespace FoodOrdering
                 var currency = _messageService.ReceiveMessage();
 
                 _messageService.SendMessage(string.Format("До сплати {0} {1}", _exchangeRateService.ChangeCurrency(order.GetFullPrice(), currency),
-                    _exchangeRateService.GetExchangeRate(currency).currency));
+                    _exchangeRateService.GetExchangeRate(currency).Currency));
             }
 
             _logger.Append(order, OperationType.Add);

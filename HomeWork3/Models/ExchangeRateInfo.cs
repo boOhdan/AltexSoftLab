@@ -1,19 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FoodOrdering.Models
 {
     public class ExchangeRateInfo
     {
-        public string date { get; set; }
-        public string bank { get; set; }
-        public decimal baseCurrency { get; set; }
-        public string baseCurrencyLit { get; set; }
-        public IEnumerable<ExchangeRate> exchangeRate { get; set; }
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+
+        [JsonPropertyName("bank")]
+        public string Bank { get; set; }
+
+        [JsonPropertyName("baseCurrency")]
+        public decimal BaseCurrency { get; set; }
+
+        [JsonPropertyName("baseCurrencyLit")]
+        public string BaseCurrencyLit { get; set; }
+
+        [JsonPropertyName("exchangeRate")]
+        public IEnumerable<ExchangeRate> ExchangeRate { get; set; }
         public override string ToString()
         {
-            return String.Format("date: {0}; bank: {1}; baseCurrency: {2}, baseCurrencyLit: {3}",
-                date, bank, baseCurrency, baseCurrencyLit);
+            return string.Format("date: {0}; bank: {1}; baseCurrency: {2}, baseCurrencyLit: {3}",
+                Date, Bank, BaseCurrency, BaseCurrencyLit);
         }
     }
 }

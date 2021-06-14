@@ -1,10 +1,10 @@
 ﻿namespace FoodOrdering.Services
 {
-    public class OrderExtension
+    public class OrderService
     {
         public Order Order { get; set; }
 
-        public OrderExtension(Order order) 
+        public OrderService(Order order) 
         {
             Order = order;
         }

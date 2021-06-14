@@ -1,14 +1,15 @@
-﻿using FoodOrdering.Models;
+﻿using FoodOrdering.Contracts;
+using FoodOrdering.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace FoodOrdering.Services
 {
-    public class ExchangeRateService
+    public class ExchangeRateService : IExchangeRateService
     {
         public ExchangeRateInfo ExchangeRateInfo { get; set; }
-        private readonly WorkingWithAPI<ExchangeRateInfo> _workingWithAPI;
+        private readonly IWorkingWithAPI<ExchangeRateInfo> _workingWithAPI;
 
         public ExchangeRateService(WorkingWithAPI<ExchangeRateInfo> workingWithAPI) 
         {
@@ -20,15 +21,15 @@ namespace FoodOrdering.Services
         }
         public IEnumerable<ExchangeRate> GetExchangeRates() 
         {
-            return ExchangeRateInfo.exchangeRate;
+            return ExchangeRateInfo.ExchangeRate;
         }
         public decimal ChangeCurrency(decimal convertedNumber, string currencyTo) 
         {
-            return convertedNumber / GetExchangeRate(currencyTo).purchaseRateNB;
+            return convertedNumber / GetExchangeRate(currencyTo).PurchaseRateNB;
         }
         public ExchangeRate GetExchangeRate(string currency) 
         {
-            return ExchangeRateInfo.exchangeRate.Where(rate => rate.currency == currency.ToUpper()).FirstOrDefault();
+            return ExchangeRateInfo.ExchangeRate.Where(rate => rate.Currency == currency.ToUpper()).FirstOrDefault();
         }
 
     }

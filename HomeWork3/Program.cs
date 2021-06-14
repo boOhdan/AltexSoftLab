@@ -3,14 +3,13 @@ using FoodOrdering.Models;
 using FoodOrdering.Services;
 using System;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FoodOrdering
 {
     public class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
 
@@ -29,7 +28,7 @@ namespace FoodOrdering
             var logger = new Logger(@"D:\TestFolder");
             var orderSystem = new OrderSystem("SameDelivery", messageService, productService, validationService, logger, exchangeRateService);
 
-            orderSystem.Start();  
+            orderSystem.Start();
         }
     }
 }
