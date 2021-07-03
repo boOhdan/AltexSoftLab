@@ -14,4 +14,10 @@ END;
 GO;
 
 INSERT INTO Product
-VALUES ([dbo].[fn_Generate_UID]('Product', 9), 'Red Bull', 21, 120);
+VALUES ([dbo].[fn_Generate_UID]('Product', 4), 'Lay’s', 32, 90);
+
+INSERT INTO Product
+VALUES ([dbo].[fn_Generate_UID]('Product', 5), 'Dove', 15, 120);
+
+INSERT INTO Product
+VALUES ([dbo].[fn_Generate_UID]('Product', 6), 'Red Bull', 21, 80);
