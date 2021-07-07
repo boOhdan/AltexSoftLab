@@ -1,0 +1,32 @@
+<Products>
+  <Product>
+    <ProductID>pro-1</ProductID>
+    <Name>BK</Name>
+    <Price>18.0000</Price>
+    <Quantity>140</Quantity>
+  </Product>
+  <Product>
+    <ProductID>pro-3</ProductID>
+    <Name>Green tea</Name>
+    <Price>15.0000</Price>
+    <Quantity>60</Quantity>
+  </Product>
+  <Product>
+    <ProductID>pro-7</ProductID>
+    <Name>Tortellini</Name>
+    <Price>35.0000</Price>
+    <Quantity>80</Quantity>
+  </Product>
+  <Product>
+    <ProductID>pro-8</ProductID>
+    <Name>Riesling</Name>
+    <Price>32.0000</Price>
+    <Quantity>90</Quantity>
+  </Product>
+  <Product>
+    <ProductID>pro-9</ProductID>
+    <Name>Pilsner</Name>
+    <Price>15.0000</Price>
+    <Quantity>120</Quantity>
+  </Product>
+</Products>
