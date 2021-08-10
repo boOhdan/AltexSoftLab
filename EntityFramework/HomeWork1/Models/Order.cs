@@ -10,9 +10,13 @@ namespace FoodOrderingSystem.Models
         public string Address { get; set; }
         public decimal FullPrice { get; set; }
         public OrderStatus Status { get; set; }
-        public Rate Rate { get; set; }
+
+        public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        public int CourierId { get; set; }
         public Courier Courier { get; set; }
+        public int RateId { get; set; }
+        public Rate Rate { get; set; }
         public IEnumerable<OrderItem> OrderItems { get; set; }
     }
 }

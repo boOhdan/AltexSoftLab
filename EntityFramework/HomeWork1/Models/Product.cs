@@ -8,6 +8,11 @@ namespace FoodOrderingSystem.Models
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public IEnumerable<ProductCategory> ProductCategories { get; set; }
+
+        public int SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
+        public int ProductCategoryId { get; set; }
+        public ProductCategory ProductCategory { get; set; }
+        public IEnumerable<OrderItem> OrderItems { get; set; }
     }
 }
