@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace FoodOrderingSystem.Services
 {
-    public class WorkingWithLINQ
+    public class Repository
     {
         private readonly AppStore _appStore;
 
-        public WorkingWithLINQ(AppStore appStore) 
+        public Repository(AppStore appStore) 
         {
             _appStore = appStore;
         }

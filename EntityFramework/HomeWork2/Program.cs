@@ -12,12 +12,12 @@ namespace FoodOrderingSystem
             Console.OutputEncoding = Encoding.UTF8;
 
             var appStore = new AppStore();
-            var workingWithLINQ = new WorkingWithLINQ(appStore);
+            var repository = new Repository(appStore);
 
             //Task 1
             Console.WriteLine("\n1) Список всех продуктов, отсортированный в алфавитном порядке\n");
 
-            foreach (var item in workingWithLINQ.SortProductsAlphabetically())
+            foreach (var item in repository.SortProductsAlphabetically())
             {
                 Console.WriteLine(item.Name);
             }
@@ -25,7 +25,7 @@ namespace FoodOrderingSystem
             //Task 2
             Console.WriteLine("\n2) Список всех продуктов с указанием поставщиков\n");
 
-            foreach (var item in workingWithLINQ.GetProductsWithTheirSuppliers())
+            foreach (var item in repository.GetProductsWithTheirSuppliers())
             {
                 Console.WriteLine("{0} - {1}", item.SupplierName, item.ProductName);
             }
@@ -33,7 +33,7 @@ namespace FoodOrderingSystem
             //Task 3
             Console.WriteLine("\n3) Список категорий с указанием количества продуктов в нём\n");
 
-            foreach (var item in workingWithLINQ.GetCategoriesWithProductsNumberInIt())
+            foreach (var item in repository.GetCategoriesWithProductsNumberInIt())
             {
                 Console.WriteLine("{0} - {1}", item.CategoryName, item.CategoryNumber);
             }
@@ -41,7 +41,7 @@ namespace FoodOrderingSystem
             //Task 4
             Console.WriteLine("\n4) Список поставщиков, отсортированный в порядке убывания количества поставляемых ими продуктов\n");
 
-            foreach (var item in workingWithLINQ.SortInDescendingSuppliersByProductNumber())
+            foreach (var item in repository.SortInDescendingSuppliersByProductNumber())
             {
                 Console.WriteLine("{0} - {1}", item.SupplierName, item.ProductNumber);
             }
@@ -49,7 +49,7 @@ namespace FoodOrderingSystem
             //Task 5.1
             Console.WriteLine("\n5.1) Список продуктов, которые поставляются Igor и Bohdan\n");
 
-            foreach (var item in workingWithLINQ.GetCommonSuppliersProducts(0, 1))
+            foreach (var item in repository.GetCommonSuppliersProducts(0, 1))
             {
                 Console.WriteLine(item.Name);
             }
@@ -57,7 +57,7 @@ namespace FoodOrderingSystem
             //Task 5.2
             Console.WriteLine("\n5.2) Список продуктов, которые поставляются только Igor, не Bohdan\n");
 
-            foreach (var item in workingWithLINQ.GetUniqueSuppliersProducts(0, 1))
+            foreach (var item in repository.GetUniqueSuppliersProducts(0, 1))
             {
                 Console.WriteLine(item.Name);
             }
