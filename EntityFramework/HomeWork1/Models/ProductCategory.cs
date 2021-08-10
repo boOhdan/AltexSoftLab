@@ -4,7 +4,8 @@ namespace FoodOrderingSystem.Models
 {
     public class ProductCategory
     {
-        public string Name;
+        public int ProductCategoryId {get; set;}
+        public string Name { get; set; }
 
         public List<Product> ProductCategories { get; set; }
     }

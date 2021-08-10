@@ -5,6 +5,7 @@ namespace FoodOrderingSystem.Models
 {
     public class Order
     {
+        public int OrderId { get; set; }
         public DateTime OrderedDate { get; set; }
         public DateTime DeliveredDate { get; set; }
         public string Address { get; set; }
