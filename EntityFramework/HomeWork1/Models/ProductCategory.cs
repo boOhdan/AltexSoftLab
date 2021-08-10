@@ -6,6 +6,6 @@ namespace FoodOrderingSystem.Models
     {
         public string Name;
 
-        public IEnumerable<Product> ProductCategories { get; set; }
+        public List<Product> ProductCategories { get; set; }
     }
 }

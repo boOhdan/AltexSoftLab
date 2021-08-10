@@ -13,6 +13,6 @@ namespace FoodOrderingSystem.Models
         public Supplier Supplier { get; set; }
         public int ProductCategoryId { get; set; }
         public ProductCategory ProductCategory { get; set; }
-        public IEnumerable<OrderItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace FoodOrderingSystem.Models
     {
         public decimal Price { get; set; }
 
-        public IEnumerable<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

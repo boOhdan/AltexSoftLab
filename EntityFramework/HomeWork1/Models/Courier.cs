@@ -4,6 +4,6 @@ namespace FoodOrderingSystem.Models
 {
     public class Courier : User
     {
-        public IEnumerable<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

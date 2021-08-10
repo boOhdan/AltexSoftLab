@@ -17,6 +17,6 @@ namespace FoodOrderingSystem.Models
         public Courier Courier { get; set; }
         public int RateId { get; set; }
         public Rate Rate { get; set; }
-        public IEnumerable<OrderItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }
