@@ -6,8 +6,8 @@ namespace FoodOrderingSystem
     {
         static void Main(string[] args)
         {
-            var foodOrderingContext = new FoodOrderingContext();
-            foodOrderingContext.Database.EnsureCreated();
+            //var foodOrderingContext = new FoodOrderingContext();
+            //foodOrderingContext.Database.EnsureCreated();
         }
     }
 }
