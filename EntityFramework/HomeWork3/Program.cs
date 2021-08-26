@@ -155,11 +155,11 @@ namespace FoodOrderingSystem
 
             //удаление сущности без вложенных объектов (Dapper)
 
-            categoryRepositoryDapper.Delete(new Category { CategoryId = 2, Name = "Fruits (UPDATED)" });
+            categoryRepositoryDapper.DeleteById(2);
 
             //удаление сущности c вложенных объектов (Dapper)
 
-            categoryRepositoryDapper.DeleteWithEmbeddedObjects(new Category { CategoryId = 4, Name = "Cakes (UPDATED)" });
+            categoryRepositoryDapper.DeleteByIdWithEmbeddedObjects(4);
 
             //сохранение сущности без вложенных объектов(DapperContib)
 
@@ -191,7 +191,7 @@ namespace FoodOrderingSystem
 
             //удаление сущности без вложенных объектов (DapperContib)
 
-            categoryRepositoryDapperContrib.Delete(new Category { CategoryId = 6 });
+            categoryRepositoryDapperContrib.DeleteById(6);
         }
 
         static IConfiguration Initialization() 

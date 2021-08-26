@@ -103,13 +103,13 @@ namespace FoodOrderingSystem.Repositories
             }
         }
 
-        public void DeleteWithEmbeddedObjects(Category category)
+        public void DeleteByIdWithEmbeddedObjects(int categoryId)
         {
-            var sqlDeleteProduct = $"DELETE FROM Products WHERE CategoryID = {category.CategoryId}";
+            var sqlDeleteProduct = $"DELETE FROM Products WHERE CategoryID = {categoryId}";
 
             _dbConnection.Query(sqlDeleteProduct);
 
-            var sqlDeleteCategory = $"DELETE FROM Categories WHERE CategoryID = {category.CategoryId}";
+            var sqlDeleteCategory = $"DELETE FROM Categories WHERE CategoryID = {categoryId}";
 
             _dbConnection.Query(sqlDeleteCategory);
         }
@@ -142,9 +142,9 @@ namespace FoodOrderingSystem.Repositories
             _dbConnection.Query(sql);
         }
 
-        public void Delete(Category category)
+        public void DeleteById(int categoryId)
         {
-            var sql = $"DELETE FROM Categories WHERE CategoryID = {category.CategoryId}";
+            var sql = $"DELETE FROM Categories WHERE CategoryID = {categoryId}";
 
             _dbConnection.Query(sql);
         }

@@ -9,6 +9,6 @@ namespace FoodOrderingSystem.Сontracts
         List<Category> GetAll();
         void Insert(Category category);
         void Update(Category category);
-        void Delete(Category category);
+        void DeleteById(int categoryId);
     }
 }

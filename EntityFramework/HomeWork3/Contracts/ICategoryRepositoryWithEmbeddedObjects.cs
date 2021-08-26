@@ -9,6 +9,6 @@ namespace FoodOrderingSystem.Сontracts
         Dictionary<int, Category> GetAllWithEmbeddedObjects();
         void InsertWithEmbeddedObjects(Category category);
         void UpdateWithEmbeddedObjects(Category category);
-        void DeleteWithEmbeddedObjects(Category category);
+        void DeleteByIdWithEmbeddedObjects(int categoryId);
     }
 }

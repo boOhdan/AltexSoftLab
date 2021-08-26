@@ -36,8 +36,10 @@ namespace FoodOrderingSystem.Repositories
             _dbConnection.Update(category);
         }
 
-        public void Delete(Category category)
+        public void DeleteById(int categoryId)
         {
+            var category = GetById(categoryId);
+
             _dbConnection.Delete(category);
         }
     }
