@@ -20,11 +20,11 @@ namespace FoodOrderingSystem
 
             //сохранение сущности без вложенных объектов (Dapper)
 
-            categoryRepositoryDapper.InsertCategory(new Category { CategoryId = 1, Name = "Vegetables" });
-            categoryRepositoryDapper.InsertCategory(new Category { CategoryId = 2, Name = "Fruits" });
+            categoryRepositoryDapper.Insert(new Category { CategoryId = 1, Name = "Vegetables" });
+            categoryRepositoryDapper.Insert(new Category { CategoryId = 2, Name = "Fruits" });
 
             //сохранение сущности с вложенными объектами (Dapper)
-            categoryRepositoryDapper.InsertCategoryWithEmbeddedObjects(new Category
+            categoryRepositoryDapper.InsertWithEmbeddedObjects(new Category
             {
                 CategoryId = 3,
                 Name = "Biscuits",
@@ -49,7 +49,7 @@ namespace FoodOrderingSystem
                 }
             });
 
-            categoryRepositoryDapper.InsertCategoryWithEmbeddedObjects(new Category
+            categoryRepositoryDapper.InsertWithEmbeddedObjects(new Category
             {
                 CategoryId = 4,
                 Name = "Cakes",
@@ -78,7 +78,7 @@ namespace FoodOrderingSystem
 
             Console.WriteLine("выборка всех сущностей без вложенных объектов (Dapper)");
 
-            var categories1 = categoryRepositoryDapper.GetAllCategories();
+            var categories1 = categoryRepositoryDapper.GetAll();
 
             foreach (var category in categories1)
             {
@@ -89,7 +89,7 @@ namespace FoodOrderingSystem
 
             Console.WriteLine("выборка всех сущностей с вложенными объектами (Dapper)");
 
-            var categories2 = categoryRepositoryDapper.GetAllCategoriesWithEmbeddedObjects();
+            var categories2 = categoryRepositoryDapper.GetAllWithEmbeddedObjects();
 
             foreach (var category in categories2)
             {
@@ -105,7 +105,7 @@ namespace FoodOrderingSystem
 
             Console.WriteLine("поиск сущности по Id без вложенных объектов (Dapper)");
 
-            var category1 = categoryRepositoryDapper.GetCategoryById(1);
+            var category1 = categoryRepositoryDapper.GetById(1);
 
             Console.WriteLine($"CategoryID: {category1.CategoryId} - CategoryName: {category1.Name}");
 
@@ -113,7 +113,7 @@ namespace FoodOrderingSystem
 
             Console.WriteLine("поиск сущности по Id c вложенных объектов (Dapper)");
 
-            var category3 = categoryRepositoryDapper.GetCategoryByIdWithEmbeddedObjects(3);
+            var category3 = categoryRepositoryDapper.GetByIdWithEmbeddedObjects(3);
 
             Console.WriteLine($"CategoryID: {category3.CategoryId} - CategoryName: {category3.Name}");
 
@@ -124,11 +124,11 @@ namespace FoodOrderingSystem
 
             //обновление сущности без вложенных объектов (Dapper)
 
-            categoryRepositoryDapper.UpdateCategory(new Category { CategoryId = 2, Name = "Fruits (UPDATED)" });
+            categoryRepositoryDapper.Update(new Category { CategoryId = 2, Name = "Fruits (UPDATED)" });
 
             //обновление сущности с вложенными объектами (Dapper)
 
-            categoryRepositoryDapper.UpdateCategoryWithEmbeddedObjects(new Category
+            categoryRepositoryDapper.UpdateWithEmbeddedObjects(new Category
             {
                 CategoryId = 4,
                 Name = "Cakes (UPDATED)",
@@ -155,22 +155,22 @@ namespace FoodOrderingSystem
 
             //удаление сущности без вложенных объектов (Dapper)
 
-            categoryRepositoryDapper.DeleteCategory(new Category { CategoryId = 2, Name = "Fruits (UPDATED)" });
+            categoryRepositoryDapper.Delete(new Category { CategoryId = 2, Name = "Fruits (UPDATED)" });
 
             //удаление сущности c вложенных объектов (Dapper)
 
-            categoryRepositoryDapper.DeleteCategoryWithEmbeddedObjects(new Category { CategoryId = 4, Name = "Cakes (UPDATED)" });
+            categoryRepositoryDapper.DeleteWithEmbeddedObjects(new Category { CategoryId = 4, Name = "Cakes (UPDATED)" });
 
             //сохранение сущности без вложенных объектов(DapperContib)
 
-            categoryRepositoryDapperContrib.InsertCategory(new Category { CategoryId = 5, Name = "Meats" });
-            categoryRepositoryDapperContrib.InsertCategory(new Category { CategoryId = 6, Name = "Frozen foods" });
+            categoryRepositoryDapperContrib.Insert(new Category { CategoryId = 5, Name = "Meats" });
+            categoryRepositoryDapperContrib.Insert(new Category { CategoryId = 6, Name = "Frozen foods" });
 
             //выборка всех сущностей без вложенных объектов (DapperContib)
 
             Console.WriteLine("выборка всех сущностей без вложенных объектов (DapperContib)");
 
-            var categories3 = categoryRepositoryDapperContrib.GetAllCategories();
+            var categories3 = categoryRepositoryDapperContrib.GetAll();
 
             foreach (var category in categories3)
             {
@@ -181,17 +181,17 @@ namespace FoodOrderingSystem
 
             Console.WriteLine("поиск сущности по Id без вложенных объектов (DapperContib)");
 
-            var category4 = categoryRepositoryDapperContrib.GetCategoryById(1);
+            var category4 = categoryRepositoryDapperContrib.GetById(1);
 
             Console.WriteLine($"CategoryID: {category4.CategoryId} - CategoryName: {category4.Name}");
 
             //обновление сущности без вложенных объектов(DapperContib)
 
-            categoryRepositoryDapperContrib.UpdateCategory(new Category { CategoryId = 5, Name = "Meats (UPDATED)" });
+            categoryRepositoryDapperContrib.Update(new Category { CategoryId = 5, Name = "Meats (UPDATED)" });
 
             //удаление сущности без вложенных объектов (DapperContib)
 
-            categoryRepositoryDapperContrib.DeleteCategory(new Category { CategoryId = 6 });
+            categoryRepositoryDapperContrib.Delete(new Category { CategoryId = 6 });
         }
 
         static IConfiguration Initialization() 

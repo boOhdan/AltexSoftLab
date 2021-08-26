@@ -16,7 +16,7 @@ namespace FoodOrderingSystem.Repositories
             _dbConnection = new SqlConnection(connectionString);
         }
 
-        public Dictionary<int, Category> GetAllCategoriesWithEmbeddedObjects()
+        public Dictionary<int, Category> GetAllWithEmbeddedObjects()
         {
             var categoryDictionary = new Dictionary<int, Category>();
 
@@ -47,7 +47,7 @@ namespace FoodOrderingSystem.Repositories
             return categoryDictionary;
         }
 
-        public Category GetCategoryByIdWithEmbeddedObjects(int id)
+        public Category GetByIdWithEmbeddedObjects(int id)
         {
             Category categoryEntry = null;
 
@@ -75,7 +75,7 @@ namespace FoodOrderingSystem.Repositories
             return categoryEntry;
         }
 
-        public void InsertCategoryWithEmbeddedObjects(Category category)
+        public void InsertWithEmbeddedObjects(Category category)
         {
             var sqlInsertCategory = $"INSERT INTO Categories VALUES('{category.CategoryId}', '{category.Name}')";
 
@@ -89,7 +89,7 @@ namespace FoodOrderingSystem.Repositories
             }
         }
 
-        public void UpdateCategoryWithEmbeddedObjects(Category category)
+        public void UpdateWithEmbeddedObjects(Category category)
         {
             var sqlUpdateCategory = $"UPDATE Categories SET Name = @CategoryName WHERE CategoryID = @CategoryID";
 
@@ -103,7 +103,7 @@ namespace FoodOrderingSystem.Repositories
             }
         }
 
-        public void DeleteCategoryWithEmbeddedObjects(Category category)
+        public void DeleteWithEmbeddedObjects(Category category)
         {
             var sqlDeleteProduct = $"DELETE FROM Products WHERE CategoryID = {category.CategoryId}";
 
@@ -114,35 +114,35 @@ namespace FoodOrderingSystem.Repositories
             _dbConnection.Query(sqlDeleteCategory);
         }
 
-        public Category GetCategoryById(int id)
+        public Category GetById(int id)
         {
             var sql = $"SELECT * FROM Categories WHERE CategoryID = {id}";
 
             return _dbConnection.QueryFirstOrDefault<Category>(sql);
         }
 
-        public List<Category> GetAllCategories()
+        public List<Category> GetAll()
         {
             var sql = $"SELECT * FROM Categories";
 
             return _dbConnection.Query<Category>(sql).ToList();
         }
 
-        public void InsertCategory(Category category)
+        public void Insert(Category category)
         {
             var sql = $"INSERT INTO Categories VALUES({category.CategoryId}, '{category.Name}')";
 
             _dbConnection.Query(sql);
         }
 
-        public void UpdateCategory(Category category)
+        public void Update(Category category)
         {
             var sql = $"UPDATE Categories SET Name = '{category.Name}' WHERE CategoryID = {category.CategoryId}";
 
             _dbConnection.Query(sql);
         }
 
-        public void DeleteCategory(Category category)
+        public void Delete(Category category)
         {
             var sql = $"DELETE FROM Categories WHERE CategoryID = {category.CategoryId}";
 

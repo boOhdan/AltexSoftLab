@@ -5,10 +5,10 @@ namespace FoodOrderingSystem.Сontracts
 {
     public interface ICategoryRepositoryWithEmbeddedObjects
     {
-        Category GetCategoryByIdWithEmbeddedObjects(int id);
-        Dictionary<int, Category> GetAllCategoriesWithEmbeddedObjects();
-        void InsertCategoryWithEmbeddedObjects(Category category);
-        void UpdateCategoryWithEmbeddedObjects(Category category);
-        void DeleteCategoryWithEmbeddedObjects(Category category);
+        Category GetByIdWithEmbeddedObjects(int id);
+        Dictionary<int, Category> GetAllWithEmbeddedObjects();
+        void InsertWithEmbeddedObjects(Category category);
+        void UpdateWithEmbeddedObjects(Category category);
+        void DeleteWithEmbeddedObjects(Category category);
     }
 }

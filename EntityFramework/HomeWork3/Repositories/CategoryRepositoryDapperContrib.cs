@@ -16,27 +16,27 @@ namespace FoodOrderingSystem.Repositories
             _dbConnection = new SqlConnection(connectionString);
         }
 
-        public List<Category> GetAllCategories()
+        public List<Category> GetAll()
         {
             return _dbConnection.GetAll<Category>().ToList();
         }
 
-        public Category GetCategoryById(int id)
+        public Category GetById(int id)
         {
             return _dbConnection.Get<Category>(id);
         }
 
-        public void InsertCategory(Category category)
+        public void Insert(Category category)
         {
             _dbConnection.Insert(category);
         }
 
-        public void UpdateCategory(Category category)
+        public void Update(Category category)
         {
             _dbConnection.Update(category);
         }
 
-        public void DeleteCategory(Category category)
+        public void Delete(Category category)
         {
             _dbConnection.Delete(category);
         }
