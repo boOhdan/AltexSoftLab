@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FoodOrderingSystem.Models
+namespace FoodOrdering.DAL.Models
 {
     public class Order
     {

@@ -1,7 +1,7 @@
-﻿using FoodOrderingSystem.Models;
+﻿using FoodOrdering.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodOrderingSystem.Date
+namespace FoodOrdering.DAL.Date
 {
     public class FoodOrderingContext : DbContext
     {

@@ -1,4 +1,4 @@
-﻿namespace FoodOrderingSystem.Models
+﻿namespace FoodOrdering.DAL.Models
 {
     public class OrderItem
     {

@@ -1,4 +1,4 @@
-﻿namespace FoodOrdering
+﻿namespace FoodOrdering.BLL.Contracts
 {
     public interface IMessageService
     {

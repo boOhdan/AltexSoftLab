@@ -1,6 +1,6 @@
-﻿using FoodOrderingSystem.Models;
+﻿using FoodOrdering.DAL.Models;
 
-namespace FoodOrderingSystem.Contracts
+namespace FoodOrdering.DAL.Contracts
 {
     public interface IUnitOfWork
     {

@@ -1,6 +1,6 @@
-﻿using FoodOrderingSystem.Date;
+﻿using FoodOrdering.DAL.Date;
 
-namespace FoodOrderingSystem
+namespace FoodOrdering.DAL
 {
     class Program
     {

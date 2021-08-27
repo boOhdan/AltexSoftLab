@@ -1,11 +1,11 @@
-﻿using FoodOrdering.Contracts;
+﻿using FoodOrdering.BLL.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
 
-namespace FoodOrdering.Services
+namespace FoodOrdering.BLL.Services
 {
     public class WorkingWithFile<T> : IWorkingWithFile<T>
     {

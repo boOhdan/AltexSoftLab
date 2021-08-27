@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FoodOrderingSystem.Migrations
+namespace FoodOrdering.DAL.Migrations
 {
     public partial class InitialCreate : Migration
     {

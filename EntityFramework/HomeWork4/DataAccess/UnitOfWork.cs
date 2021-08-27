@@ -1,8 +1,9 @@
-﻿using FoodOrderingSystem.Contracts;
-using FoodOrderingSystem.Date;
-using FoodOrderingSystem.Models;
+﻿using FoodOrdering.DAL.Contracts;
+using FoodOrdering.DAL.Date;
+using FoodOrdering.DAL.DateAccess;
+using FoodOrdering.DAL.Models;
 
-namespace FoodOrderingSystem.DAL
+namespace FoodOrdering.DAL.DataAccess
 {
     public class UnitOfWork : IUnitOfWork
     {

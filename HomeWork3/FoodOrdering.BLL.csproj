@@ -1,8 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\**" />
+    <Compile Remove="Models\**" />
+    <Compile Remove="UI\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="UI\**" />
+    <None Remove="Data\**" />
+    <None Remove="Models\**" />
+    <None Remove="UI\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contracts\IMessageService.cs" />
+    <Compile Remove="Contracts\IProductService.cs" />
+    <Compile Remove="Contracts\IProductsStore.cs" />
+    <Compile Remove="Program.cs" />
+    <Compile Remove="Services\ConsoleService.cs" />
+    <Compile Remove="Services\ProductService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntityFramework\HomeWork4\FoodOrdering.DAL.csproj" />
+  </ItemGroup>
 
 </Project>

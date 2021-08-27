@@ -1,6 +1,7 @@
-﻿using System;
+﻿using FoodOrdering.BLL.Contracts;
+using System;
 
-namespace FoodOrdering.Services
+namespace FoodOrdering.BLL.Services
 {
     public class ConsoleService : IMessageService
     {
