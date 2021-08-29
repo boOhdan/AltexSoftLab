@@ -12,9 +12,9 @@ namespace FoodOrdering.DAL.Date
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public FoodOrderingContext(DbContextOptions<FoodOrderingContext> options)
+        : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-2MCESAJ\\SQLEXPRESS;Initial Catalog=TestFoodOrderingDB;Trusted_Connection=True;MultipleActiveResultSets=True");
         }
     }
 }

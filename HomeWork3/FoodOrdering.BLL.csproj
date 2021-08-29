@@ -21,7 +21,6 @@
     <Compile Remove="Contracts\IMessageService.cs" />
     <Compile Remove="Contracts\IProductService.cs" />
     <Compile Remove="Contracts\IProductsStore.cs" />
-    <Compile Remove="Program.cs" />
     <Compile Remove="Services\ConsoleService.cs" />
     <Compile Remove="Services\ProductService.cs" />
   </ItemGroup>
