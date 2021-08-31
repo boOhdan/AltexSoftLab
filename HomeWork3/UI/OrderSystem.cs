@@ -1,5 +1,6 @@
 ﻿using FoodOrdering.Contracts;
 using FoodOrdering.Models;
+using FoodOrdering.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,16 @@ namespace FoodOrdering
         private readonly IMessageService _messageService;
         private readonly IValidationService _validationService;
         private readonly ILogger _logger;
+        private readonly IExchangeRateService _exchangeRateService;
 
-        public OrderSystem(string name, IMessageService messageService, IProductService productService, 
-            IValidationService validationService, ILogger logger, ICache<int, Product> productCache) 
+        public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService, ILogger logger, IExchangeRateService exchangeRateService) 
         {
             _name = name;
             _messageService = messageService;
             _productService = productService;
             _validationService = validationService;
             _logger = logger;
+            _exchangeRateService = exchangeRateService;
         }
 
         public void Start() 
@@ -202,6 +204,21 @@ namespace FoodOrdering
             }
 
             order = new Order(address, phoneNumber, orderItems);
+
+            if(AskQuestion("Бажаєте змінити валюту?")) 
+            {
+                foreach (var exchangeRate in _exchangeRateService.GetExchangeRates())
+                {
+                    _messageService.SendMessage(exchangeRate.Currency);
+                }
+
+                _messageService.SendMessage("Виберiть одну з перелічених вище валют:");
+
+                var currency = _messageService.ReceiveMessage();
+
+                _messageService.SendMessage(string.Format("До сплати {0} {1}", _exchangeRateService.ChangeCurrency(order.GetFullPrice(), currency),
+                    _exchangeRateService.GetExchangeRate(currency).Currency));
+            }
 
             _logger.Append(order, OperationType.Add);
 
