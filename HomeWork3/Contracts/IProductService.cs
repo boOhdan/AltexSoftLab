@@ -4,6 +4,8 @@ namespace FoodOrdering
 {
     public interface IProductService
     {
+
+        int GetProductsCount();
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> AddProduct(Product product);
         IDictionary<int, string> GetProductTypes();

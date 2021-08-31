@@ -17,10 +17,11 @@ namespace FoodOrdering
             productsStore.InitializeProducts();
 
             var messageService = new ConsoleService();
-            var productService = new ProductService(productsStore);
+            var productsCache = new Cache<int, Product>();
+            var productService = new ProductService(productsStore, productsCache);
             var validationService = new ValidationService(productsStore);
             var logger = new Logger(@"D:\TestFolder");
-            var orderSystem = new OrderSystem("SameDelivery", messageService, productService, validationService, logger);
+            var orderSystem = new OrderSystem("SameDelivery", messageService, productService, validationService, logger, productsCache);
 
             orderSystem.Start();
         }

@@ -15,7 +15,8 @@ namespace FoodOrdering
         private readonly IValidationService _validationService;
         private readonly ILogger _logger;
 
-        public OrderSystem(string name, IMessageService messageService, IProductService productService, IValidationService validationService, ILogger logger) 
+        public OrderSystem(string name, IMessageService messageService, IProductService productService, 
+            IValidationService validationService, ILogger logger, ICache<int, Product> productCache) 
         {
             _name = name;
             _messageService = messageService;
@@ -103,7 +104,7 @@ namespace FoodOrdering
                     return false;
                 }
 
-                product = new Product(name, description, price, (ProductType)typeNumber, quantity);
+                product = new Product(_productService.GetProductsCount(),  name, description, price, (ProductType)typeNumber, quantity);
 
                 _productService.AddProduct(product);
                 _logger.Append(product, OperationType.Add);

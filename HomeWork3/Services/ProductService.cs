@@ -8,10 +8,12 @@ namespace FoodOrdering
     public class ProductService : IProductService
     {
         private readonly IProductsStore _productsStore;
+        private readonly ICache<int, Product> _productsCache;
 
-        public ProductService(IProductsStore products)
+        public ProductService(IProductsStore products, ICache<int, Product> productsCache)
         {
             _productsStore = products;
+            _productsCache = productsCache;
         }
 
         public IEnumerable<Product> AddProduct(Product product)
@@ -26,6 +28,11 @@ namespace FoodOrdering
         {
             return _productsStore.Products;
         }
+        public int GetProductsCount() 
+        {
+            return _productsStore.Products.Count;
+        }
+
         public IDictionary<int, string> GetProductTypes()
         {
             return Enum.GetValues(typeof(ProductType))
@@ -42,7 +49,9 @@ namespace FoodOrdering
 
         public Product GetProductById(int id)
         {
-            return _productsStore.Products.ElementAt(id);
+            return _productsCache.GetOrCreate(id, (productId) => _productsStore.Products
+                                                            .Where(product => product.Id == productId)
+                                                            .FirstOrDefault());
         }
 
         public Product ReduceProductQuantity(int id, int quantity) 
