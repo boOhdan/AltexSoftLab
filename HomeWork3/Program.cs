@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FoodOrdering
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
         }
     }

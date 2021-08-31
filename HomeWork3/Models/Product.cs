@@ -1,17 +1,17 @@
-﻿using System;
-
-namespace FoodOrdering
+﻿namespace FoodOrdering
 {
     public class Product
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public ProductType Type { get; set; }
 
-        public Product(string name, string description, decimal price, ProductType type, int quantity) 
+        public Product(int id, string name, string description, decimal price, ProductType type, int quantity) 
         {
+            Id = id;
             Name = name;
             Description = description;
             Price = price;
@@ -21,8 +21,8 @@ namespace FoodOrdering
 
         public override string ToString()
         {
-            return String.Format("Name: {0}, Description: {1}, Price: {2}, Type: {3}, Quantity: {4}"
-                , Name, Description, Price, Type.ToString(), Quantity);
+            return string.Format("Id: {0}, Name: {1}, Description: {2}, Price: {3}, Type: {4}, Quantity: {5}",
+                Id, Name, Description, Price, Type.ToString(), Quantity);
         }
     }
 }

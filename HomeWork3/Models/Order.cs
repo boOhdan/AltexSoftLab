@@ -20,6 +20,18 @@ namespace FoodOrdering
             Status = OrderStatus.InProcess;
         }
 
+        public decimal GetFullPrice()
+        {
+            var price = 0m;
+
+            foreach (var orderItem in OrderItems)
+            {
+                price += orderItem.Product.Price;
+            }
+
+            return price;
+        }
+
         public override string ToString()
         {
             return String.Format("OrderDate: {0}; Address: {1}; PhoneNumber: {2}, Status: {3}",
