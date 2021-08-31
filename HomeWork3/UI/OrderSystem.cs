@@ -120,7 +120,7 @@ namespace FoodOrdering
 
         public bool OrderProduct() 
         {
-            OrderService order = default;
+            Order order = default;
             IEnumerable<OrderItem> orderItems = new List<OrderItem>();
 
             while (true)
@@ -203,7 +203,7 @@ namespace FoodOrdering
                 return false;
             }
 
-            order = new OrderService(new Order(address, phoneNumber, orderItems));
+            order = new Order(address, phoneNumber, orderItems);
 
             if(AskQuestion("Бажаєте змінити валюту?")) 
             {
