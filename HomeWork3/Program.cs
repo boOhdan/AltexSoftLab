@@ -23,7 +23,8 @@ namespace FoodOrdering
             await exchangeRateService.InitializeAsync();
 
             var messageService = new ConsoleService();
-            var productService = new ProductService(productsStore);
+            var productsCache = new Cache<int, Product>();
+            var productService = new ProductService(productsStore, productsCache);
             var validationService = new ValidationService(productsStore);
             var logger = new Logger(@"D:\TestFolder");
             var orderSystem = new OrderSystem("SameDelivery", messageService, productService, validationService, logger, exchangeRateService);

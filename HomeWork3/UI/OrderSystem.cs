@@ -106,7 +106,7 @@ namespace FoodOrdering
                     return false;
                 }
 
-                product = new Product(name, description, price, (ProductType)typeNumber, quantity);
+                product = new Product(_productService.GetProductsCount(),  name, description, price, (ProductType)typeNumber, quantity);
 
                 _productService.AddProduct(product);
                 _logger.Append(product, OperationType.Add);
