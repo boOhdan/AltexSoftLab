@@ -1,9 +1,9 @@
-﻿using FoodOrdering.Contracts;
+﻿using FoodOrdering.BLL.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FoodOrdering.Services
+namespace FoodOrdering.BLL.Services
 {
     public class Cache<TKey, TValue> : ICache<TKey, TValue>
     {

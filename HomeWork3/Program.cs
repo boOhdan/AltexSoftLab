@@ -1,12 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FoodOrdering
+﻿namespace FoodOrdering.BLL
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
         }
     }

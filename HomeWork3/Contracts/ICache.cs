@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FoodOrdering.Contracts
+namespace FoodOrdering.BLL.Contracts
 {
     public interface ICache<TKey, TValue>
     {
