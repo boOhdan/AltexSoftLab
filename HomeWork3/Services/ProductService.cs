@@ -1,9 +1,10 @@
-﻿using FoodOrdering.Contracts;
+﻿using FoodOrdering.BLL.Contracts;
+using FoodOrdering.BLL.FoodOrdering.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FoodOrdering
+namespace FoodOrdering.BLL
 {
     public class ProductService : IProductService
     {

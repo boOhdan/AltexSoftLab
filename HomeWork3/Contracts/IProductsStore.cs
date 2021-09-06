@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FoodOrdering.Contracts
+namespace FoodOrdering.BLL.Contracts
 {
     public interface IProductsStore
     {

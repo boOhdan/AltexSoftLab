@@ -1,12 +1,12 @@
-﻿using FoodOrderingSystem.Contracts;
-using FoodOrderingSystem.Date;
+﻿using FoodOrdering.DAL.Contracts;
+using FoodOrdering.DAL.Date;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace FoodOrderingSystem.DAL
+namespace FoodOrdering.DAL.DateAccess
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity :class
     {

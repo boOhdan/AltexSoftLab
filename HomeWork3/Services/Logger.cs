@@ -1,10 +1,9 @@
-﻿using FoodOrdering.Contracts;
-using FoodOrdering.Models;
+﻿using FoodOrdering.BLL.Contracts;
 using System;
 using System.IO;
 using System.Text;
 
-namespace FoodOrdering.Services
+namespace FoodOrdering.BLL.Services
 {
     public class Logger : ILogger
     {
@@ -15,7 +14,7 @@ namespace FoodOrdering.Services
             _fileDirectory = Directory.Exists(filedirectory) ? filedirectory : throw new DirectoryNotFoundException();
         }
 
-        public void Append<T>(T element, OperationType operationStatus) 
+        public void Append<T>(T element, string operationStatus) 
         {
             var fileName = "logs_" + DateTime.Now.ToString("MMddyyyy") + ".txt";
 
