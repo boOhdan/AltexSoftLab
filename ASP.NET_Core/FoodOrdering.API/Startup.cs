@@ -29,7 +29,6 @@ namespace FoodOrdering.API
                 options => options.UseSqlServer("Server=DESKTOP-2MCESAJ\\SQLEXPRESS;Initial Catalog=TestFoodOrderingDB;Trusted_Connection=True;MultipleActiveResultSets=True"));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.AddScoped(typeof(IWorkingWithFile<>), typeof(WorkingWithFile<>));
             services.AddScoped(typeof(IWorkingWithAPI<ExchangeRateInfo>), 
                 _ => new WorkingWithAPI<ExchangeRateInfo>("https://api.privatbank.ua/p24api/exchange_rates?json&date=13.06.2021"));
@@ -37,11 +36,11 @@ namespace FoodOrdering.API
             services.AddScoped<ILogger, Logger>(_ => new Logger(@"D:\Test.txt"));
             services.AddScoped<IValidationService, ValidationService>();
 
-            services.AddControllers();
+            services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodOrdering.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoApi", Version = "v1" });
             });
         }
 
@@ -51,11 +50,10 @@ namespace FoodOrdering.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FoodOrdering.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoApi v1"));
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
@@ -63,6 +61,13 @@ namespace FoodOrdering.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=ProductsMvc}/{action=Index}/{id?}");
             });
         }
     }
