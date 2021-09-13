@@ -1,0 +1,17 @@
+﻿@model IEnumerable<FoodOrdering.DAL.Models.Product>
+@using FoodOrdering.DAL.Models
+
+@{
+    ViewData["Title"] = "TagHelperIndex";
+}
+
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<h3>Product List</h3>
+
+<products products="Model"></products>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
