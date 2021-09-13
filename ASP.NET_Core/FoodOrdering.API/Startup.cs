@@ -67,7 +67,7 @@ namespace FoodOrdering.API
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ProductsMvc}/{action=Index}/{id?}");
+                    pattern: "mvc/{controller=ProductsMvc}/{action=Index}/{id?}");
             });
         }
     }

@@ -80,7 +80,7 @@ namespace FoodOrdering.API.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 _unitOfWork.ProductsRepo.Update(product);
                 _unitOfWork.Commit();
@@ -121,4 +121,3 @@ namespace FoodOrdering.API.Controllers
         }
     }
 }
-

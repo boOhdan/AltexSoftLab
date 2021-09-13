@@ -1,4 +1,5 @@
-﻿using FoodOrdering.DAL.Contracts;
+﻿using FoodOrdering.API.Filters;
+using FoodOrdering.DAL.Contracts;
 using FoodOrdering.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace FoodOrdering.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [TypeFilter(typeof(CustomExceptionFilter))]
     public class ProductsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -62,13 +64,14 @@ namespace FoodOrdering.API.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(CustomActionFilter))]
         public ActionResult<Product> CreateProduct(Product product)
         {
             _unitOfWork.ProductsRepo.Insert(product);
             _unitOfWork.Commit();
 
-            return CreatedAtAction( 
-                nameof(GetProduct), 
+            return CreatedAtAction(
+                nameof(GetProduct),
                 new { id = product.ProductId },
                 product);
         }
@@ -93,4 +96,3 @@ namespace FoodOrdering.API.Controllers
             _unitOfWork.ProductsRepo.Get().Any(e => e.ProductId == id);
     }
 }
-
