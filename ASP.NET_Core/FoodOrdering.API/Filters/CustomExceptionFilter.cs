@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace FoodOrdering.API.Filters
 {
@@ -20,12 +21,19 @@ namespace FoodOrdering.API.Filters
 
         public void OnException(ExceptionContext context)
         {
-            if (!_hostingEnvironment.IsDevelopment())
-            {
-                return;
-            }
+            var exeption = context.Exception;
 
-            _logger.LogWarning("Failed to connect, retry limit exceeded.", context.Exception);
+            if (_hostingEnvironment.IsDevelopment())
+            {
+                var devMessage = $"An error occurred! \nMessage: \n{exeption.Message} \nStackTrace: \n{exeption.StackTrace}";
+
+                _logger.LogWarning(exeption, devMessage);
+                Console.WriteLine(devMessage);
+            } 
+            else if (_hostingEnvironment.IsProduction()) 
+            {
+                Console.WriteLine($"An error occurred! \nMessage: \n{exeption.Message}");
+            }
         }
     }
 }

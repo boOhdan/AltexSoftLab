@@ -37,6 +37,7 @@ namespace FoodOrdering.API.Controllers
             return View(product);
         }
 
+        [ResponseCache(VaryByHeader = "Accept-Encoding", Duration = 120)]
         public IActionResult Details(int? id)
         {
             if (id is null)

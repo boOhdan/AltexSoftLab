@@ -26,7 +26,7 @@ namespace FoodOrdering.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FoodOrderingContext>(
-                options => options.UseSqlServer("Server=DESKTOP-2MCESAJ\\SQLEXPRESS;Initial Catalog=TestFoodOrderingDB;Trusted_Connection=True;MultipleActiveResultSets=True"));
+                options => options.UseSqlServer(Configuration.GetConnectionString("FoodOrderingDatabase")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IWorkingWithFile<>), typeof(WorkingWithFile<>));
