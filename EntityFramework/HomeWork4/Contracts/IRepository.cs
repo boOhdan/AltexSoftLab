@@ -13,7 +13,7 @@ namespace FoodOrdering.DAL.Contracts
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "");
-        TEntity GetByID(object id);
+        TEntity GetById(object id);
         void Insert(TEntity entity);
         void Update(TEntity entityToUpdate);
     }

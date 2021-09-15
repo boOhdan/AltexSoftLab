@@ -1,10 +1,9 @@
-﻿using FoodOrdering.Contracts;
-using System;
+﻿using FoodOrdering.BLL.Contracts;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FoodOrdering.Services
+namespace FoodOrdering.BLL.Services
 {
     public class WorkingWithAPI<T> : IWorkingWithAPI<T>
     {
