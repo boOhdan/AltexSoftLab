@@ -1,8 +1,9 @@
-﻿using FoodOrdering.DAL.Contracts;
+﻿using FoodOrdering.BLL.Contracts;
 using FoodOrdering.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FoodOrdering.API.Controllers
 {
@@ -10,28 +11,86 @@ namespace FoodOrdering.API.Controllers
     [Route("[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<ProductsController> _logger;
+        private readonly IProductService _productService;
 
-        public ProductsController(ILogger<ProductsController> logger, IUnitOfWork unitOfWork)
+        public ProductsController(IProductService productService)
         {
-            _logger = logger;
-            _unitOfWork = unitOfWork;
+            _productService = productService;
         }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
-        {
-            var products = _unitOfWork.ProductsRepo.Get();
+        public ActionResult<IEnumerable<Product>> GetProducts() =>
+            _productService.Get().ToList();
 
-            return products;
+
+        [HttpGet("{id}")]
+        public ActionResult<Product> GetProduct(int id)
+        {
+            var product = _productService.GetById(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return product;
         }
 
-        //GET /api/products
-        //GET /api/products/{id}
-        //POST /api/products
-        //PUT /api/products/{id}
-        //DELETE /api/products/{id}
+        [HttpPut("{id}")]
+        public IActionResult UpdateProduct(int id, Product product)
+        {
+            if (id != product.ProductId)
+            {
+                return BadRequest();
+            }
+
+            _productService.Update(product);
+
+            try
+            {
+                _productService.Save();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductExists(id))
+                {
+                    return NotFound();
+                }
+            }
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        public ActionResult<Product> CreateProduct(Product product)
+        {
+            _productService.Insert(product);
+            _productService.Save();
+
+            return CreatedAtAction(
+                nameof(GetProduct),
+                new { id = product.ProductId },
+                product);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = _productService.GetById(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            _productService.Delete(product);
+            _productService.Save();
+
+            return NoContent();
+        }
+
+        private bool ProductExists(int id) =>
+            _productService.Get().Any(e => e.ProductId == id);
     }
 }
 

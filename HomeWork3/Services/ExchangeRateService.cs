@@ -1,17 +1,17 @@
-﻿using FoodOrdering.Contracts;
-using FoodOrdering.Models;
+﻿using FoodOrdering.BLL.Contracts;
+using FoodOrdering.DAL.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FoodOrdering.Services
+namespace FoodOrdering.BLL.Services
 {
     public class ExchangeRateService : IExchangeRateService
     {
         public ExchangeRateInfo ExchangeRateInfo { get; set; }
         private readonly IWorkingWithAPI<ExchangeRateInfo> _workingWithAPI;
 
-        public ExchangeRateService(WorkingWithAPI<ExchangeRateInfo> workingWithAPI) 
+        public ExchangeRateService(IWorkingWithAPI<ExchangeRateInfo> workingWithAPI) 
         {
             _workingWithAPI = workingWithAPI;
         }

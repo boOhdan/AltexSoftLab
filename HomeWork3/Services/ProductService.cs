@@ -1,72 +1,42 @@
 ﻿using FoodOrdering.BLL.Contracts;
-using FoodOrdering.BLL.FoodOrdering.DAL.Models;
-using System;
+using FoodOrdering.DAL.Contracts;
+using FoodOrdering.DAL.Models;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace FoodOrdering.BLL
+namespace FoodOrdering.BLL.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IProductsStore _productsStore;
-        private readonly ICache<int, Product> _productsCache;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductService(IProductsStore products, ICache<int, Product> productsCache)
+        public ProductService(IUnitOfWork unitOfWork)
         {
-            _productsStore = products;
-            _productsCache = productsCache;
+            _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Product> AddProduct(Product product)
-        {
-            _productsStore.Products.Add(product);
-            _productsStore.UpdateStorageContent();
+        public IEnumerable<Product> Get() => 
+            _unitOfWork.ProductsRepo.Get();
 
-            return _productsStore.Products;
-        }
 
-        public IEnumerable<Product> GetAllProducts() 
-        {
-            return _productsStore.Products;
-        }
-        public int GetProductsCount() 
-        {
-            return _productsStore.Products.Count;
-        }
+        public Product GetById(int id) =>
+            _unitOfWork.ProductsRepo.GetById(id);
+        
 
-        public IDictionary<int, string> GetProductTypes()
-        {
-            return Enum.GetValues(typeof(ProductType))
-                .Cast<ProductType>()
-                .ToDictionary(a => (int)a, a => a.ToString());
-        }
+        public void Insert(Product product) =>
+            _unitOfWork.ProductsRepo.Insert(product);
+        
 
-        public IDictionary<int, Product> GetProductsByType(ProductType productType)
-        {
-            return _productsStore.Products.Select((product, index) => new { index, product })
-                    .Where(a => a.product.Type == productType)
-                    .ToDictionary(a => a.index, a => a.product);
-        }
+        public void Delete(int id) =>
+            _unitOfWork.ProductsRepo.Delete(id);
+        
 
-        public Product GetProductById(int id)
-        {
-            return _productsCache.GetOrCreate(id, (productId) => _productsStore.Products
-                                                            .Where(product => product.Id == productId)
-                                                            .FirstOrDefault());
-        }
+        public void Delete(Product product) =>
+            _unitOfWork.ProductsRepo.Delete(product);
 
-        public Product ReduceProductQuantity(int id, int quantity) 
-        {
-            GetProductById(id).Quantity -= quantity;
-            return GetProductById(id);
-        }
+        public void Update(Product product) =>
+            _unitOfWork.ProductsRepo.Update(product);
 
-        public IEnumerable<Product> DeleteProduct(int id) 
-        {
-            _productsStore.Products.Where(a => a != GetProductById(id));
-            _productsStore.UpdateStorageContent();
-
-            return _productsStore.Products;
-        }
+        public void Save() => 
+            _unitOfWork.Commit();
     }
 }

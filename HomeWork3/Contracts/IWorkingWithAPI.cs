@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace FoodOrdering.Contracts
+namespace FoodOrdering.BLL.Contracts
 {
     public interface IWorkingWithAPI<T>
     {

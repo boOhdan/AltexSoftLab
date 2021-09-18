@@ -1,8 +1,10 @@
+using FoodOrdering.BLL;
 using FoodOrdering.BLL.Contracts;
 using FoodOrdering.BLL.Services;
 using FoodOrdering.DAL.Contracts;
 using FoodOrdering.DAL.DataAccess;
 using FoodOrdering.DAL.Date;
+using FoodOrdering.DAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,10 +30,13 @@ namespace FoodOrdering.API
                 options => options.UseSqlServer("Server=DESKTOP-2MCESAJ\\SQLEXPRESS;Initial Catalog=TestFoodOrderingDB;Trusted_Connection=True;MultipleActiveResultSets=True"));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<ILogger>(_ => new Logger(@"D:\Test.txt"));
-            services.AddScoped<IValidationService, ValidationService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped(typeof(IWorkingWithFile<>), typeof(WorkingWithFile<>));
+            services.AddScoped(typeof(IWorkingWithAPI<ExchangeRateInfo>),
+                _ => new WorkingWithAPI<ExchangeRateInfo>("https://api.privatbank.ua/p24api/exchange_rates?json&date=13.06.2021"));
+            services.AddScoped<IExchangeRateService, ExchangeRateService>();
+            services.AddScoped<ILogger, Logger>(_ => new Logger(@"D:\Test.txt"));
+            services.AddScoped<IValidationService, ValidationService>();
 
             services.AddControllers();
 

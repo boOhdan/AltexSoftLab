@@ -1,8 +1,8 @@
-﻿using FoodOrdering.Models;
+﻿using FoodOrdering.DAL.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FoodOrdering.Contracts
+namespace FoodOrdering.BLL.Contracts
 {
     public interface IExchangeRateService
     {
