@@ -18,6 +18,11 @@ namespace FoodOrdering.API.Controllers
             return View(_unitOfWork.ProductsRepo.Get(includeProperties: "Supplier,ProductCategory"));
         }
 
+        public IActionResult TagHelperIndex() 
+        {
+            return View(_unitOfWork.ProductsRepo.Get());
+        }
+
         public IActionResult Create()
         {
             return View();

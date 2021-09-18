@@ -25,7 +25,7 @@ namespace FoodOrdering.API.Filters
                 return;
             }
 
-            _logger.LogWarning("Failed to connect, retry limit exceeded.", context.Exception);
+            _logger.LogError("Failed to connect, retry limit exceeded.", context.Exception);
         }
     }
 }
