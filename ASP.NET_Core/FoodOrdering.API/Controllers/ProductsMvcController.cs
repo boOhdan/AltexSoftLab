@@ -13,17 +13,20 @@ namespace FoodOrdering.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View(_unitOfWork.ProductsRepo.Get(includeProperties: "Supplier,ProductCategory"));
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(int? id, Product product)
         {
             if (ModelState.IsValid)
@@ -37,6 +40,7 @@ namespace FoodOrdering.API.Controllers
             return View(product);
         }
 
+        [HttpGet]
         public IActionResult Details(int? id)
         {
             if (id is null)
@@ -54,6 +58,7 @@ namespace FoodOrdering.API.Controllers
             return View(product);
         }
 
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id is null)
@@ -91,6 +96,7 @@ namespace FoodOrdering.API.Controllers
             return View(product);
         }
 
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id is null)
