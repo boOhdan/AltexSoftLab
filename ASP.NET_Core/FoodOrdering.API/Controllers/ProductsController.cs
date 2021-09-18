@@ -1,5 +1,6 @@
-﻿using FoodOrdering.API.Filters;
+using FoodOrdering.API.Filters;
 using FoodOrdering.DAL.Contracts;
+using FoodOrdering.BLL.Contracts;
 using FoodOrdering.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,22 +14,22 @@ namespace FoodOrdering.API.Controllers
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class ProductsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductService _productService;
 
-        public ProductsController(IUnitOfWork unitOfWork)
+        public ProductsController(IProductService productService)
         {
-            _unitOfWork = unitOfWork;
+            _productService = productService;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetProducts() =>
-            _unitOfWork.ProductsRepo.Get().ToList();
-
+            _productService.Get().ToList();
 
         [HttpGet("{id}")]
         public ActionResult<Product> GetProduct(int id)
         {
-            var product = _unitOfWork.ProductsRepo.GetById(id);
+            var product = _productService.GetById(id);
+
 
             if (product is null)
             {
@@ -46,11 +47,11 @@ namespace FoodOrdering.API.Controllers
                 return BadRequest();
             }
 
-            _unitOfWork.ProductsRepo.Update(product);
+            _productService.Update(product);
 
             try
             {
-                _unitOfWork.Commit();
+                _productService.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -67,8 +68,8 @@ namespace FoodOrdering.API.Controllers
         [TypeFilter(typeof(CustomActionFilter))]
         public ActionResult<Product> CreateProduct(Product product)
         {
-            _unitOfWork.ProductsRepo.Insert(product);
-            _unitOfWork.Commit();
+            _productService.Insert(product);
+            _productService.Save();
 
             return CreatedAtAction(
                 nameof(GetProduct),
@@ -79,20 +80,20 @@ namespace FoodOrdering.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
-            var product = _unitOfWork.ProductsRepo.GetById(id);
+            var product = _productService.GetById(id);
 
             if (product is null)
             {
                 return NotFound();
             }
 
-            _unitOfWork.ProductsRepo.Delete(product);
-            _unitOfWork.Commit();
+            _productService.Delete(product);
+            _productService.Save();
 
             return NoContent();
         }
 
         private bool ProductExists(int id) =>
-            _unitOfWork.ProductsRepo.Get().Any(e => e.ProductId == id);
+            _productService.Get().Any(e => e.ProductId == id);
     }
 }
