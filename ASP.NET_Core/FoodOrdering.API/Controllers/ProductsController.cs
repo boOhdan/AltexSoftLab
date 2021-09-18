@@ -8,7 +8,7 @@ using System.Linq;
 namespace FoodOrdering.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -22,11 +22,11 @@ namespace FoodOrdering.API.Controllers
         public ActionResult<IEnumerable<Product>> GetProducts() =>
             _productService.Get().ToList();
 
-
         [HttpGet("{id}")]
         public ActionResult<Product> GetProduct(int id)
         {
             var product = _productService.GetById(id);
+
 
             if (product is null)
             {
