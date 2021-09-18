@@ -1,3 +1,4 @@
+using FoodOrdering.BLL;
 using FoodOrdering.BLL.Contracts;
 using FoodOrdering.BLL.Services;
 using FoodOrdering.DAL.Contracts;
@@ -29,6 +30,7 @@ namespace FoodOrdering.API
                 options => options.UseSqlServer("Server=DESKTOP-2MCESAJ\\SQLEXPRESS;Initial Catalog=TestFoodOrderingDB;Trusted_Connection=True;MultipleActiveResultSets=True"));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped(typeof(IWorkingWithFile<>), typeof(WorkingWithFile<>));
             services.AddScoped(typeof(IWorkingWithAPI<ExchangeRateInfo>),
                 _ => new WorkingWithAPI<ExchangeRateInfo>("https://api.privatbank.ua/p24api/exchange_rates?json&date=13.06.2021"));
