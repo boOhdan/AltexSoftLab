@@ -1,4 +1,4 @@
-﻿using FoodOrdering.DAL.Contracts;
+using FoodOrdering.DAL.Contracts;
 using FoodOrdering.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,17 +13,25 @@ namespace FoodOrdering.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View(_unitOfWork.ProductsRepo.Get(includeProperties: "Supplier,ProductCategory"));
         }
 
+        public IActionResult TagHelperIndex() 
+        {
+            return View(_unitOfWork.ProductsRepo.Get());
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(int? id, Product product)
         {
             if (ModelState.IsValid)
@@ -37,6 +45,7 @@ namespace FoodOrdering.API.Controllers
             return View(product);
         }
 
+        [HttpGet]
         [ResponseCache(VaryByHeader = "Accept-Encoding", Duration = 120)]
         public IActionResult Details(int? id)
         {
@@ -55,6 +64,7 @@ namespace FoodOrdering.API.Controllers
             return View(product);
         }
 
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id is null)
@@ -92,6 +102,7 @@ namespace FoodOrdering.API.Controllers
             return View(product);
         }
 
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id is null)
