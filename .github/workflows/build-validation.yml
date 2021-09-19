@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore ./ASP.NET_Core/FoodOrdering.API/FoodOrdering.API.csproj
+      run: dotnet restore ~/ASP.NET_Core/FoodOrdering.API/FoodOrdering.API.csproj
     - name: Build
       run: dotnet build --no-restore
     - name: Test
