@@ -1,4 +1,4 @@
-﻿using FoodOrdering.DAL.Contracts;
+using FoodOrdering.DAL.Contracts;
 using FoodOrdering.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +17,11 @@ namespace FoodOrdering.API.Controllers
         public IActionResult Index()
         {
             return View(_unitOfWork.ProductsRepo.Get(includeProperties: "Supplier,ProductCategory"));
+        }
+
+        public IActionResult TagHelperIndex() 
+        {
+            return View(_unitOfWork.ProductsRepo.Get());
         }
 
         [HttpGet]
@@ -85,7 +90,7 @@ namespace FoodOrdering.API.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 _unitOfWork.ProductsRepo.Update(product);
                 _unitOfWork.Commit();
@@ -127,4 +132,3 @@ namespace FoodOrdering.API.Controllers
         }
     }
 }
-
