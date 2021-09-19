@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build ..\..\ASP.NET_Core\FoodOrdering.API\FoodOrdering.API.csproj --no-restore
+      run: dotnet build ../../ASP.NET_Core/FoodOrdering.API/FoodOrdering.API.csproj --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
