@@ -46,6 +46,7 @@ namespace FoodOrdering.API.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(VaryByHeader = "Accept-Encoding", Duration = 120)]
         public IActionResult Details(int? id)
         {
             if (id is null)
