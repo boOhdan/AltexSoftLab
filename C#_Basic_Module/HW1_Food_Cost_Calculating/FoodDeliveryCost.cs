@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HomeWork1
 {
-    internal class HomeWork
+    internal class FoodDeliveryCost
     {
         private decimal GetFullPrice(
                                     IEnumerable<string> destinations,

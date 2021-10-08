@@ -6,7 +6,7 @@ namespace HomeWork1
     {
         static void Main(string[] args)
         {
-            HomeWork homeWork = new HomeWork();
+            FoodDeliveryCost homeWork = new FoodDeliveryCost();
 
             Console.WriteLine(homeWork.InvokePriceCalculatiion());
             Console.ReadKey();

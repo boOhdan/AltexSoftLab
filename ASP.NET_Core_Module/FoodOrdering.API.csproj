@@ -12,11 +12,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\EntityFramework\HomeWork4\FoodOrdering.DAL.csproj" />
-    <ProjectReference Include="..\..\HomeWork3\FoodOrdering.BLL.csproj" />
+    <ProjectReference Include="..\Entity_Framework_Module\HW4_Migrations\FoodOrdering.DAL.csproj" />
+    <ProjectReference Include="..\C#_Basic_Module\HW3_Food_Ordering_Services\FoodOrdering.BLL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
